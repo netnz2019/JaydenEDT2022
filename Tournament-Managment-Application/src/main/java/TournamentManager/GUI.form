@@ -32,10 +32,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="TabbedPanel" min="-2" pref="736" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
+          <Component id="TabbedPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -76,7 +73,7 @@
                                       <Component id="SelectSport" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="291" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="305" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -107,7 +104,7 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="270" pref="574" max="32767" attributes="0"/>
+                                      <EmptySpace min="270" pref="588" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -328,8 +325,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="Select a Sport"/>
-                    <StringItem index="1" value="Football"/>
-                    <StringItem index="2" value="Hockey"/>
+                    <StringItem index="1" value="Hockey"/>
+                    <StringItem index="2" value="Football"/>
                     <StringItem index="3" value="Rugby"/>
                     <StringItem index="4" value="Netball"/>
                   </StringArray>
@@ -567,7 +564,7 @@
                               <Component id="RoundNumber" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="SelectRoundNumber" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="144" max="32767" attributes="0"/>
+                              <EmptySpace pref="158" max="32767" attributes="0"/>
                               <Component id="GameNumber" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -656,8 +653,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="Select a Sport"/>
-                    <StringItem index="1" value="Football"/>
-                    <StringItem index="2" value="Hockey"/>
+                    <StringItem index="1" value="Hockey"/>
+                    <StringItem index="2" value="Football"/>
                     <StringItem index="3" value="Rugby"/>
                     <StringItem index="4" value="Netball"/>
                   </StringArray>
@@ -786,7 +783,7 @@
                               <Component id="RoundNumber1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="SelectRoundNumber1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="144" max="32767" attributes="0"/>
+                              <EmptySpace pref="158" max="32767" attributes="0"/>
                               <Component id="GameNumber1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -875,8 +872,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="Select a Sport"/>
-                    <StringItem index="1" value="Football"/>
-                    <StringItem index="2" value="Hockey"/>
+                    <StringItem index="1" value="Hockey"/>
+                    <StringItem index="2" value="Football"/>
                     <StringItem index="3" value="Rugby"/>
                     <StringItem index="4" value="Netball"/>
                   </StringArray>
@@ -1027,7 +1024,7 @@
                                       <Component id="Team6Enter" min="-2" pref="85" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -1049,6 +1046,11 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="ErrorPreventionTeamSetup" min="-2" pref="134" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1076,12 +1078,14 @@
                           <Component id="Team7Enter" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Team6Enter" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="ErrorPreventionTeamSetup" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="SetupTourButtton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="ClearTourButtton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="71" max="32767" attributes="0"/>
+                      <EmptySpace pref="88" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1097,8 +1101,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="Select a Sport"/>
-                    <StringItem index="1" value="Football"/>
-                    <StringItem index="2" value="Hockey"/>
+                    <StringItem index="1" value="Hockey"/>
+                    <StringItem index="2" value="Football"/>
                     <StringItem index="3" value="Rugby"/>
                     <StringItem index="4" value="Netball"/>
                   </StringArray>
@@ -1184,6 +1188,11 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Team 7"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ErrorPreventionTeamSetup">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
           </SubComponents>

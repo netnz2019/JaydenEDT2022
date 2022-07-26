@@ -1,19 +1,70 @@
 package TournamentManager;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jaydenetheridge
  */
 public class GUI extends javax.swing.JFrame {
-
+    Main Main = new Main();
+    
+    ArrayList<String> TeamNames = new ArrayList<String>();
+    
+    
     /**
      * Creates new form Main
      */
-    public GUI() {
+    public GUI() {                
         initComponents();
         
-
     }
+
+    
+    public void addTeams(){
+       
+        String R1T1text = Team1Enter.getText(); 
+        
+        String R1T2text = Team2Enter.getText();
+        
+        String R1T3text = Team3Enter.getText();
+        
+        String R1T4text = Team4Enter.getText();
+        
+        String R1T5text = Team5Enter.getText();
+        
+        String R1T6text = Team6Enter.getText();
+        
+        String R1T7text = Team7Enter.getText();
+        
+        String R1T8text = Team8Enter.getText();
+       
+        TeamNames.clear();
+        TeamNames.add(R1T1text);
+        TeamNames.add(R1T2text);
+        TeamNames.add(R1T3text);
+        TeamNames.add(R1T4text);
+        TeamNames.add(R1T5text);
+        TeamNames.add(R1T6text);
+        TeamNames.add(R1T7text);
+        TeamNames.add(R1T8text);
+        
+    }
+    
+//  getter method
+    public ArrayList getTeamlist(){
+        return TeamNames;
+    }
+
+//  Setter method to change the pre-set variable
+    public void setTeamlist(ArrayList teamNames){
+        this.TeamNames = teamNames;
+    }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,6 +157,7 @@ public class GUI extends javax.swing.JFrame {
         Team6Enter = new javax.swing.JTextField();
         Team7Enter = new javax.swing.JTextField();
         Team8Enter = new javax.swing.JTextField();
+        ErrorPreventionTeamSetup = new javax.swing.JLabel();
 
         TournamentTreeImage.setIcon(new javax.swing.ImageIcon("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/Images/Tournament-Tree.png")); // NOI18N
 
@@ -113,7 +165,7 @@ public class GUI extends javax.swing.JFrame {
 
         SelectSport.setText("Select Sports Tournament");
 
-        SportsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Football", "Hockey", "Rugby", "Netball" }));
+        SportsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
         SportsComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SportsComboBoxActionPerformed(evt);
@@ -241,7 +293,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(FIrstRoundLabel)
                                 .addGap(74, 74, 74)
                                 .addComponent(SelectSport)))
-                        .addGap(0, 291, Short.MAX_VALUE))
+                        .addGap(0, 305, Short.MAX_VALUE))
                     .addGroup(ViewTourLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +316,7 @@ public class GUI extends javax.swing.JFrame {
                                         .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(ScoreR1T7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(ScoreR1T8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(270, 574, Short.MAX_VALUE))
+                                .addGap(270, 588, Short.MAX_VALUE))
                             .addGroup(ViewTourLayout.createSequentialGroup()
                                 .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(ViewTourLayout.createSequentialGroup()
@@ -425,7 +477,7 @@ public class GUI extends javax.swing.JFrame {
 
         SelectSport1.setText("Select Sport first then Round Number");
 
-        SportsComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Football", "Hockey", "Rugby", "Netball" }));
+        SportsComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
         SportsComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SportsComboBox1ActionPerformed(evt);
@@ -480,7 +532,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(RoundNumber)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SelectRoundNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                         .addComponent(GameNumber))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -541,7 +593,7 @@ public class GUI extends javax.swing.JFrame {
 
         SelectSport2.setText("Select Sport first then Round Number");
 
-        SportsComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Football", "Hockey", "Rugby", "Netball" }));
+        SportsComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
         SportsComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SportsComboBox2ActionPerformed(evt);
@@ -594,7 +646,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(RoundNumber1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SelectRoundNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                         .addComponent(GameNumber1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -655,7 +707,7 @@ public class GUI extends javax.swing.JFrame {
 
         SelectSport3.setText("Select Sports Tournament");
 
-        SportsComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Football", "Hockey", "Rugby", "Netball" }));
+        SportsComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
         SportsComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SportsComboBox3ActionPerformed(evt);
@@ -708,6 +760,8 @@ public class GUI extends javax.swing.JFrame {
         Team8Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team8Enter.setText("Team 7");
 
+        ErrorPreventionTeamSetup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout SetupTourLayout = new javax.swing.GroupLayout(SetupTour);
         SetupTour.setLayout(SetupTourLayout);
         SetupTourLayout.setHorizontalGroup(
@@ -736,7 +790,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(Team5Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(Team6Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18))
+                        .addGap(32, 32, 32))
                     .addGroup(SetupTourLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(SetupTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -752,6 +806,10 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Team4Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(161, 161, 161))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ErrorPreventionTeamSetup, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(295, 295, 295))
         );
         SetupTourLayout.setVerticalGroup(
             SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -774,11 +832,13 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(Team8Enter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Team7Enter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Team6Enter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87)
+                .addGap(52, 52, 52)
+                .addComponent(ErrorPreventionTeamSetup)
+                .addGap(18, 18, 18)
                 .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SetupTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClearTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Setup Tournament", SetupTour);
@@ -787,9 +847,7 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(TabbedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(TabbedPanel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -812,7 +870,28 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SportsComboBox3ActionPerformed
 
     private void SetupTourButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetupTourButttonActionPerformed
-        // TODO add your handling code here:
+        addTeams();
+        String SportType = SportsComboBox3.getSelectedItem().toString();
+        
+        if (SportType.equals("Select a Sport")){
+            ErrorPreventionTeamSetup.setText("Please select a sport.");
+        }
+        
+        else if (SportType.equals("Hockey")){
+            try {
+            Main.clearHockeyTeams();
+            Main.writeHockeyTeams(); 
+            
+            ErrorPreventionTeamSetup.setText("Team has been Entered");
+            } 
+            
+            catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+                       
     }//GEN-LAST:event_SetupTourButttonActionPerformed
 
     private void SelectRoundNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRoundNumberActionPerformed
@@ -848,29 +927,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_Team4EnterActionPerformed
 
     private void ViewTourButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewTourButttonActionPerformed
-       String R1T1text = Team1Enter.getText();
-        R1T1.setText(R1T1text);
-        
-       String R1T2text = Team2Enter.getText();
-        R1T2.setText(R1T2text);
-        
-       String R1T3text = Team3Enter.getText();
-        R1T3.setText(R1T3text);
-        
-       String R1T4text = Team4Enter.getText();
-        R1T4.setText(R1T4text);
-        
-       String R1T5text = Team5Enter.getText();
-        R1T5.setText(R1T5text);
-        
-       String R1T6text = Team6Enter.getText();
-        R1T6.setText(R1T6text);
-        
-       String R1T7text = Team7Enter.getText();
-        R1T7.setText(R1T7text);
-        
-       String R1T8text = Team8Enter.getText();
-        R1T8.setText(R1T8text);
+//        getTeamNames();
     }//GEN-LAST:event_ViewTourButttonActionPerformed
 
     private void SportsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportsComboBoxActionPerformed
@@ -906,6 +963,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton ClearTourButtton;
     private javax.swing.JPanel EnterResults;
     private javax.swing.JButton EnterResultsButton;
+    private javax.swing.JLabel ErrorPreventionTeamSetup;
     private javax.swing.JLabel FIrstRoundLabel;
     private javax.swing.JTextField FinalT1;
     private javax.swing.JTextField FinalT2;
