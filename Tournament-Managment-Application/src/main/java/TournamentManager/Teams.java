@@ -1,13 +1,10 @@
 package TournamentManager;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author jaydenetheridge
  */
 public class Teams {
-    ArrayList<String> TeamNames = new ArrayList<String>();
     
 //  Creating Variables
     private String teamName1;
@@ -30,26 +27,72 @@ public class Teams {
         this.teamName7 = TeamName7;
         this.teamName8 = TeamName8;
         
-        TeamNames.clear();
-        TeamNames.add(TeamName1);
-        TeamNames.add(TeamName2);
-        TeamNames.add(TeamName3);
-        TeamNames.add(TeamName4);
-        TeamNames.add(TeamName5);
-        TeamNames.add(TeamName6);
-        TeamNames.add(TeamName7);
-        TeamNames.add(TeamName8);
-        
     }
     
-//  getter method
-    public ArrayList getTeamlist(){
-        return TeamNames;
+//  getter methods
+    public String getTeam1(){
+        return teamName1;
+    }
+    
+    public String getTeam2(){
+        return teamName2;
+    }
+    
+    public String getTeam3(){
+        return teamName3;
+    }
+    
+    public String getTeam4(){
+        return teamName4;
+    }
+    
+    public String getTeam5(){
+        return teamName5;
+    }
+    
+    public String getTeam6(){
+        return teamName6;
+    }
+    
+    public String getTeam7(){
+        return teamName7;
+    }
+    
+    public String getTeam8(){
+        return teamName8;
     }
 
 //  Setter method to change the pre-set variable
-    public void setTeamlist(ArrayList teamNames){
-        this.TeamNames = teamNames;
+    public void setTeam1(String TeamName1){
+        this.teamName1 = TeamName1;
+    }
+    
+    public void setTeam2(String TeamName2){
+        this.teamName2 = TeamName2;
+    }
+    
+    public void setTeam3(String TeamName3){
+        this.teamName3 = TeamName3;
+    }
+    
+    public void setTeam4(String TeamName4){
+        this.teamName4 = TeamName4;
+    }
+    
+    public void setTeam5(String TeamName5){
+        this.teamName5 = TeamName5;
+    }
+    
+    public void setTeam6(String TeamName6){
+        this.teamName6 = TeamName6;
+    }
+    
+    public void setTeam7(String TeamName7){
+        this.teamName7 = TeamName7;
+    }
+    
+    public void setTeam8(String TeamName8){
+        this.teamName8 = TeamName8;
     }
 
 }
