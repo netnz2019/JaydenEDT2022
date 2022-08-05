@@ -2,7 +2,6 @@ package TournamentManager;
 
 // Importing Required APIs
 import java.io.FileWriter;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
