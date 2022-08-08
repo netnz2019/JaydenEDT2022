@@ -72,7 +72,7 @@ public class Main {
     public static void showHockeyTeams(String team1, String team2, String team3, String team4, String team5, String team6, String team7, String team8){
         GUI.Team1 = team1;
         GUI.Team2 = team2;
-        GUI.Team3 = team4;
+        GUI.Team3 = team3;
         GUI.Team4 = team4;
         GUI.Team5 = team5;
         GUI.Team6 = team6;
