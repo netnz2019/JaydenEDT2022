@@ -8,13 +8,23 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
 
 /**
  *
  * @author jaydenetheridge
  */
 public class GUI extends javax.swing.JFrame {
-    ArrayList<String> TeamNames = new ArrayList<String>();
+    ArrayList<String> TeamNames = new ArrayList<>();
+    List<Results> GameResults = new ArrayList<>();
     
     static String Team1;
     static String Team2;
@@ -25,6 +35,9 @@ public class GUI extends javax.swing.JFrame {
     static String Team7;
     static String Team8;
     
+    final String HockeyResultsFile = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyResults.csv";
+    final String HockeyTeamsFile = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyTournament.csv";
+    
     /**
      * Creates new form Main
      */
@@ -32,11 +45,12 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
         hideElements();
         
+        
     }
     
     public void writeHockeyTeams() throws IOException{
         
-        try(FileWriter fw = new FileWriter("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyTournament.csv", true); 
+        try(FileWriter fw = new FileWriter(HockeyTeamsFile, true); 
             BufferedWriter bw = new BufferedWriter(fw); 
             PrintWriter pw = new PrintWriter(bw)){                                  
                 String collectNames = TeamNames.stream().collect(Collectors.joining(","));                
@@ -46,8 +60,57 @@ public class GUI extends javax.swing.JFrame {
         }       
         
         catch (IOException e) {
-        }    
+        } 
     }
+    
+    public void writeHockeyResults() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException{
+        
+        try(FileWriter fw = new FileWriter(HockeyResultsFile, true);
+            ){             
+            // Create Mapping Strategy to arrange the 
+            // column name in order
+            ColumnPositionMappingStrategy mappingStrategy = new ColumnPositionMappingStrategy();
+         
+                        
+            mappingStrategy.setType(Results.class);
+  
+            // Arrange column name as provided in below array.
+            String[] columns = new String[] {"RoundNum", "GameNum", "Team1", "Team1Score", "Team2", "Team2Score", "Winner", "WinnerScore"};
+            mappingStrategy.setColumnMapping(columns);
+  
+            // Creating StatefulBeanToCsv object
+            StatefulBeanToCsv beanWriter = new StatefulBeanToCsvBuilder(fw)
+            .withMappingStrategy(mappingStrategy)
+            .build();
+            
+            // Write list to StatefulBeanToCsv object
+            beanWriter.write(GameResults);
+            System.out.println(GameResults);
+            int lineCount = lineCount();
+            System.out.println(lineCount);
+            
+            // closing the writer object
+            fw.close();
+        
+        }       
+        
+        catch (IOException e) {
+        }  
+        
+    }
+    
+    public final int lineCount() throws FileNotFoundException, IOException{
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(HockeyResultsFile));
+        String input;
+        int count = 0;
+        while((input = bufferedReader.readLine()) != null){
+            count++;
+        }
+
+        System.out.println("Count : " + count);
+        return count;
+    }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,6 +186,22 @@ public class GUI extends javax.swing.JFrame {
         R1T24 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         Team1Label2 = new javax.swing.JLabel();
+        SetupTour = new javax.swing.JPanel();
+        SelectSport3 = new javax.swing.JLabel();
+        SportsComboBox3 = new javax.swing.JComboBox<>();
+        TournamentTree3 = new javax.swing.JLabel();
+        SetupTourButtton = new javax.swing.JButton();
+        ClearTourButtton = new javax.swing.JButton();
+        Team1Enter = new javax.swing.JTextField();
+        Team2Enter = new javax.swing.JTextField();
+        Team3Enter = new javax.swing.JTextField();
+        Team4Enter = new javax.swing.JTextField();
+        Team5Enter = new javax.swing.JTextField();
+        Team6Enter = new javax.swing.JTextField();
+        Team7Enter = new javax.swing.JTextField();
+        Team8Enter = new javax.swing.JTextField();
+        ErrorPreventionTeamSetup = new javax.swing.JLabel();
+        ErrorPreventionTeamSetup1 = new javax.swing.JLabel();
         EnterResults = new javax.swing.JPanel();
         SelectSport2 = new javax.swing.JLabel();
         SportsComboBox2 = new javax.swing.JComboBox<>();
@@ -148,26 +227,15 @@ public class GUI extends javax.swing.JFrame {
         nameGame2 = new javax.swing.JLabel();
         nameGame3 = new javax.swing.JLabel();
         nameGame4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        SetupTour = new javax.swing.JPanel();
-        SelectSport3 = new javax.swing.JLabel();
-        SportsComboBox3 = new javax.swing.JComboBox<>();
-        TournamentTree3 = new javax.swing.JLabel();
-        SetupTourButtton = new javax.swing.JButton();
-        ClearTourButtton = new javax.swing.JButton();
-        Team1Enter = new javax.swing.JTextField();
-        Team2Enter = new javax.swing.JTextField();
-        Team3Enter = new javax.swing.JTextField();
-        Team4Enter = new javax.swing.JTextField();
-        Team5Enter = new javax.swing.JTextField();
-        Team6Enter = new javax.swing.JTextField();
-        Team7Enter = new javax.swing.JTextField();
-        Team8Enter = new javax.swing.JTextField();
-        ErrorPreventionTeamSetup = new javax.swing.JLabel();
-        ErrorPreventionTeamSetup1 = new javax.swing.JLabel();
+        WinnerEnter = new javax.swing.JTextField();
+        WinnerEnterLabel = new javax.swing.JLabel();
+        WinnerScoreEnter = new javax.swing.JTextField();
+        WinnerScoreLabel = new javax.swing.JLabel();
+        ClearResultsFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        TabbedPanel.setForeground(new java.awt.Color(0, 0, 0));
 
         SelectSport.setText("Select Sports Tournament");
 
@@ -299,7 +367,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(FIrstRoundLabel)
                                 .addGap(74, 74, 74)
                                 .addComponent(SelectSport)))
-                        .addGap(0, 317, Short.MAX_VALUE))
+                        .addGap(0, 319, Short.MAX_VALUE))
                     .addGroup(ViewTourLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +390,7 @@ public class GUI extends javax.swing.JFrame {
                                         .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(ScoreR1T7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(ScoreR1T8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(270, 600, Short.MAX_VALUE))
+                                .addGap(270, 602, Short.MAX_VALUE))
                             .addGroup(ViewTourLayout.createSequentialGroup()
                                 .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(ViewTourLayout.createSequentialGroup()
@@ -611,7 +679,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(T2EnterScore1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 159, Short.MAX_VALUE))
+                        .addGap(72, 161, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -702,233 +770,12 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(T2EnterScore1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Team2Label))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(ViewResultsButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
 
         TabbedPanel.addTab("View Round/Game", ViewGame);
-
-        SelectSport2.setText("Select Sport first then Round Number");
-
-        SportsComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
-        SportsComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SportsComboBox2ActionPerformed(evt);
-            }
-        });
-
-        EnterResultsButton.setText("Enter Round Results");
-        EnterResultsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EnterResultsButtonActionPerformed(evt);
-            }
-        });
-
-        SelectRoundNumber1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Round Number", "First Round", "Semi Finals", "Finals" }));
-        SelectRoundNumber1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelectRoundNumber1ActionPerformed(evt);
-            }
-        });
-
-        SelectGameNumber1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Game Number", "1", "2", "3", "4" }));
-        SelectGameNumber1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelectGameNumber1ActionPerformed(evt);
-            }
-        });
-
-        RoundNumber1.setText("Round Number");
-
-        GameNumber1.setText("Game Number");
-
-        Team1Label1.setText("Team 1 - ");
-
-        Team2Label1.setText("Team 2 - ");
-
-        T1EnterScore.setText("T1 Score");
-
-        T2EnterScore.setText("T2 Score");
-
-        ErrorPreventionResultsEnter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ErrorPreventionResultsEnter.setToolTipText("");
-
-        R1T9.setEditable(false);
-
-        R1T10.setEditable(false);
-
-        R1T11.setEditable(false);
-        R1T11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T11ActionPerformed(evt);
-            }
-        });
-
-        R1T12.setEditable(false);
-
-        R1T13.setEditable(false);
-        R1T13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T13ActionPerformed(evt);
-            }
-        });
-
-        R1T14.setEditable(false);
-
-        R1T15.setEditable(false);
-
-        R1T16.setEditable(false);
-
-        nameGame1.setText("Game 1");
-
-        nameGame2.setText("Game 2");
-
-        nameGame3.setText("Game 3");
-
-        nameGame4.setText("Game 4");
-
-        jLabel1.setText("Winner");
-
-        javax.swing.GroupLayout EnterResultsLayout = new javax.swing.GroupLayout(EnterResults);
-        EnterResults.setLayout(EnterResultsLayout);
-        EnterResultsLayout.setHorizontalGroup(
-            EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addComponent(RoundNumber1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelectRoundNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(R1T16, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(nameGame1)
-                                .addGap(118, 118, 118)
-                                .addComponent(nameGame3))
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(nameGame2)
-                                .addGap(118, 118, 118)
-                                .addComponent(nameGame4)))))
-                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(GameNumber1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelectGameNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Team2Label1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(Team1Label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(7, 7, 7)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
-                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(161, 161, 161))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(66, 66, 66))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(87, 87, 87))))))
-            .addGroup(EnterResultsLayout.createSequentialGroup()
-                .addGap(294, 294, 294)
-                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SportsComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EnterResultsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
-                .addGap(291, 291, 291))
-            .addGroup(EnterResultsLayout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(SelectSport2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180))
-        );
-        EnterResultsLayout.setVerticalGroup(
-            EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EnterResultsLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(SelectSport2)
-                .addGap(18, 18, 18)
-                .addComponent(SportsComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SelectRoundNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SelectGameNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RoundNumber1)
-                    .addComponent(GameNumber1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameGame1)
-                    .addComponent(nameGame3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addComponent(R1T13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Team2Label1)))
-                            .addComponent(Team1Label1)))
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nameGame2)
-                            .addComponent(nameGame4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(R1T11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(27, 27, 27)
-                .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EnterResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
-
-        TabbedPanel.addTab("Enter Round Results", EnterResults);
 
         SelectSport3.setText("Select Sports Tournament");
 
@@ -1037,7 +884,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
                 .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SetupTourLayout.createSequentialGroup()
-                        .addContainerGap(193, Short.MAX_VALUE)
+                        .addContainerGap(195, Short.MAX_VALUE)
                         .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(SetupTourLayout.createSequentialGroup()
                                 .addComponent(Team1Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1069,7 +916,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(280, 280, 280))
             .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
-                    .addContainerGap(327, Short.MAX_VALUE)
+                    .addContainerGap(329, Short.MAX_VALUE)
                     .addComponent(ErrorPreventionTeamSetup1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(270, 270, 270)))
         );
@@ -1100,15 +947,264 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SetupTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClearTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
             .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
-                    .addContainerGap(320, Short.MAX_VALUE)
+                    .addContainerGap(336, Short.MAX_VALUE)
                     .addComponent(ErrorPreventionTeamSetup1)
                     .addGap(152, 152, 152)))
         );
 
         TabbedPanel.addTab("Setup Tournament", SetupTour);
+
+        SelectSport2.setText("Select Sport first then Round Number");
+
+        SportsComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
+        SportsComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SportsComboBox2ActionPerformed(evt);
+            }
+        });
+
+        EnterResultsButton.setText("Enter Round Results");
+        EnterResultsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnterResultsButtonActionPerformed(evt);
+            }
+        });
+
+        SelectRoundNumber1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Round Number", "First Round", "Semi Finals", "Finals" }));
+        SelectRoundNumber1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectRoundNumber1ActionPerformed(evt);
+            }
+        });
+
+        SelectGameNumber1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Game Number", "1", "2", "3", "4" }));
+        SelectGameNumber1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectGameNumber1ActionPerformed(evt);
+            }
+        });
+
+        RoundNumber1.setText("Round Number");
+
+        GameNumber1.setText("Game Number");
+
+        Team1Label1.setText("Team 1 - ");
+
+        Team2Label1.setText("Team 2 - ");
+
+        T2EnterScore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                T2EnterScoreActionPerformed(evt);
+            }
+        });
+
+        ErrorPreventionResultsEnter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ErrorPreventionResultsEnter.setToolTipText("");
+
+        R1T9.setEditable(false);
+
+        R1T10.setEditable(false);
+
+        R1T11.setEditable(false);
+        R1T11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T11ActionPerformed(evt);
+            }
+        });
+
+        R1T12.setEditable(false);
+
+        R1T13.setEditable(false);
+        R1T13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T13ActionPerformed(evt);
+            }
+        });
+
+        R1T14.setEditable(false);
+
+        R1T15.setEditable(false);
+
+        R1T16.setEditable(false);
+
+        nameGame1.setText("Game 1");
+
+        nameGame2.setText("Game 2");
+
+        nameGame3.setText("Game 3");
+
+        nameGame4.setText("Game 4");
+
+        WinnerEnterLabel.setText("Winner");
+
+        WinnerScoreLabel.setText("Score");
+
+        ClearResultsFile.setText("Clear Game Results File");
+        ClearResultsFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearResultsFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EnterResultsLayout = new javax.swing.GroupLayout(EnterResults);
+        EnterResults.setLayout(EnterResultsLayout);
+        EnterResultsLayout.setHorizontalGroup(
+            EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addComponent(RoundNumber1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelectRoundNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(R1T13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(R1T12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(R1T16, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(nameGame1)
+                                .addGap(118, 118, 118)
+                                .addComponent(nameGame3))
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(nameGame2)
+                                .addGap(118, 118, 118)
+                                .addComponent(nameGame4)))))
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(GameNumber1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelectGameNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Team2Label1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                            .addComponent(Team1Label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                                        .addComponent(WinnerEnterLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(WinnerScoreLabel)
+                                        .addGap(42, 42, 42))
+                                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                                        .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(32, 32, 32))))
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())))))
+            .addGroup(EnterResultsLayout.createSequentialGroup()
+                .addGap(294, 294, 294)
+                .addComponent(SportsComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(291, 291, 291))
+            .addGroup(EnterResultsLayout.createSequentialGroup()
+                .addGap(255, 255, 255)
+                .addComponent(SelectSport2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addComponent(EnterResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(ClearResultsFile, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(170, 170, 170))
+        );
+        EnterResultsLayout.setVerticalGroup(
+            EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EnterResultsLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(SelectSport2)
+                .addGap(18, 18, 18)
+                .addComponent(SportsComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SelectRoundNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SelectGameNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RoundNumber1)
+                    .addComponent(GameNumber1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameGame1)
+                    .addComponent(nameGame3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameGame2)
+                            .addComponent(nameGame4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(R1T16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(R1T11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(R1T12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(27, 27, 27))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addComponent(R1T13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(WinnerEnterLabel)
+                                    .addComponent(WinnerScoreLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Team2Label1)))
+                            .addComponent(Team1Label1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EnterResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ClearResultsFile, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
+        TabbedPanel.addTab("Enter Round Results", EnterResults);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1199,6 +1295,33 @@ public class GUI extends javax.swing.JFrame {
             else if (RoundNum.equals("First Round")){
                 if (GameNum.equals("Select Game Number")){
                     ErrorPreventionResultsEnter.setText("Please select a Game Number.");
+                }
+                else if (GameNum.equals("1")){
+                    String Team1Score = T1EnterScore.getText();
+                    int team1Score = Integer.parseInt(Team1Score);
+                    
+                    String Team2Score = T2EnterScore.getText();
+                    int team2Score = Integer.parseInt(Team2Score);
+                    
+                    String WinnerName = WinnerEnter.getText();
+                    
+                    String WinnerScore = WinnerScoreEnter.getText();
+                    int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                    
+                    Results game1 = new Results(1, 1, Team1, team1Score, Team2, team2Score, WinnerName, winnerScoreEnter);
+          
+                    GameResults.clear();
+                    GameResults.add(game1);
+                    
+                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                                          
+                    try {
+                        writeHockeyResults();
+                    } 
+                    
+                    catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException ex) {
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
@@ -1515,6 +1638,14 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_R1T23ActionPerformed
 
+    private void T2EnterScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T2EnterScoreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_T2EnterScoreActionPerformed
+
+    private void ClearResultsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearResultsFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClearResultsFileActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1547,6 +1678,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ClearResultsFile;
     private javax.swing.JButton ClearTourButtton;
     private javax.swing.JPanel EnterResults;
     private javax.swing.JButton EnterResultsButton;
@@ -1642,11 +1774,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton ViewResultsButtton;
     private javax.swing.JPanel ViewTour;
     private javax.swing.JButton ViewTourButtton;
+    private javax.swing.JTextField WinnerEnter;
+    private javax.swing.JLabel WinnerEnterLabel;
     private javax.swing.JLabel WinnerLabel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField WinnerScoreEnter;
+    private javax.swing.JLabel WinnerScoreLabel;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel nameGame1;
     private javax.swing.JLabel nameGame2;
     private javax.swing.JLabel nameGame3;

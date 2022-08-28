@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package TournamentManager;
+
+import static java.lang.String.valueOf;
 
 /**
  *
@@ -11,87 +9,130 @@ package TournamentManager;
 public class Results {
     
     //  Creating Variables
-    private int roundNum;
-    private String team1Name;
-    private int team1Score;
-    private String team2Name;
-    private int team2Score;
-    private String winnerName;
-    private int winnerScore;
+    private String RoundNum;
+    private String GameNum;
+    private String Team1Name;
+    private String Team1Score;
+    private String Team2Name;
+    private String Team2Score;
+    private String WinnerName;
+    private String WinnerScore;
     
     
-//  Constructor that takes arguments
-    public Results( int roundNum, String team1Name, int team1Score, String team2Name, int team2Score, String winnerName, int winnerScore){
-        this.roundNum = roundNum;
-        this.team1Name = team1Name;
-        this.team1Score = team1Score;
-        this.team2Name = team2Name;
-        this.team2Score = team2Score;
-        this.winnerName = winnerName;
-        this.winnerScore = winnerScore;        
-    }
-    
-
-    
-//  getter methods
-    public int getroundNum(){
-        return this.roundNum;
+//   Constructor that takes arguments
+    public Results( int roundNum, int gameNum, String team1Name, int team1Score, String team2Name, int team2Score, String winnerName, int winnerScore){
+        this.RoundNum = valueOf(roundNum);
+        this.GameNum = valueOf(gameNum);
+        this.Team1Name = team1Name;
+        this.Team1Score = valueOf(team1Score);
+        this.Team2Name = team2Name;
+        this.Team2Score = valueOf(team2Score);
+        this.WinnerName = winnerName;
+        this.WinnerScore = valueOf(winnerScore);        
     } 
     
-    public String getteam1Name(){
-        return this.team1Name;
-    }
-  
-    public int getteam1Score(){
-        return this.team1Score;
+//    Getter/Setter Methods
+    public String getRoundNum(){
+        return RoundNum;
     }
     
-    public String getteam2Name(){
-        return this.team2Name;
-    }
-  
-    public int getteam2Score(){
-        return this.team2Score;
+    public void setRoundNum(){
+        this.RoundNum = RoundNum;
     }
     
-    public String getwinnerName(){
-        return this.winnerName;
-    }
-  
-    public int getwinnerScore(){
-        return this.winnerScore;
-    } 
-    
-    
-    
-//  Setter methods to change the instance variables
-    public void setroundNum(int roundNum){
-        this.roundNum = roundNum;
-    }
-  
-    public void setteam1Num(String team1Name){
-        this.team1Name = team1Name;
-    }
-
-    public void setteam1Score(int team1Score){
-        this.team1Score = team1Score;
+    public String getGameNum(){
+        return GameNum;
     }
     
-    public void setteam2Num(String team2Name){
-        this.team2Name = team2Name;
-    }
-
-    public void setteam2Score(int team2Score){
-        this.team2Score = team2Score;
+    public void setGameNum(){
+        this.GameNum = GameNum;
     }
     
-    public void setwinnerNum(String winnerName){
-        this.winnerName = winnerName;
-    }
-
-    public void setwinnerScore(int winnerScore){
-        this.winnerScore = winnerScore;
+    public String getTeam1(){
+        return Team1Name;
     }
     
+    public void setTeam1(){
+        this.Team1Name = Team1Name;
+    }
+    
+    public String getTeam1Score(){
+        return Team1Score;
+    }
+    
+    public void setTeam1Score(){
+        this.Team1Score = Team1Score;
+    }
+    
+    public String getTeam2(){
+        return Team2Name;
+    }
+    
+    public void setTeam2(){
+        this.Team2Name = Team2Name;
+    }
+    
+    public String getTeam2Score(){
+        return Team2Score;
+    }
+    
+    public void setTeam2Score(){
+        this.Team2Score = Team2Score;
+    }
+    
+    public String getWinner(){
+        return WinnerName;
+    }
+    
+    public void setWinner(){
+        this.WinnerName = WinnerName;
+    }
+    
+    public String getWinnerScore(){
+        return WinnerScore;
+    }
+    
+    public void setWinnerScore(){
+        this.WinnerScore = WinnerScore;
+    }
+    
+    @Override
+    public String toString(){
+        return "Results{" + 
+                "RoundNum='" + RoundNum + '\'' + 
+                ", GameNum='" + GameNum + '\'' +
+                ", Team1='" + Team1Name + '\'' +
+                ", Team1Score='" + Team1Score + '\'' +
+                ", Team2='" + Team2Name + '\'' +
+                ", Team2Score='" + Team2Score + '\'' +
+                ", Winner='" + WinnerName + '\'' +
+                ", WinnerScore='" + WinnerScore + '\'' +
+                '}';
+    }
+    
+//    @Override
+//    public String toString(){
+//        StringBuilder dataBuilder = new StringBuilder();
+//        appendFieldValue(dataBuilder, RoundNum);
+//        appendFieldValue(dataBuilder, GameNum);
+//        appendFieldValue(dataBuilder, Team1Name);
+//        appendFieldValue(dataBuilder, Team1Score);
+//        appendFieldValue(dataBuilder, Team2Name);
+//        appendFieldValue(dataBuilder, Team2Score);
+//        appendFieldValue(dataBuilder, WinnerName);
+//        appendFieldValue(dataBuilder, WinnerScore);
+//        
+//        
+//
+//        return dataBuilder.toString();
+//    }
+//
+//    private void appendFieldValue(StringBuilder dataBuilder, String fieldValue) {
+//        if(fieldValue != null) {
+//            dataBuilder.append(fieldValue).append(", ");
+//        } else {
+//            dataBuilder.append("").append(",");
+//        }
+//    }
     
 }
