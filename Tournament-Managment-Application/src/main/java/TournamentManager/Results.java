@@ -9,6 +9,7 @@ import static java.lang.String.valueOf;
 public class Results {
     
     //  Creating Variables
+    private String GameID;
     private String RoundNum;
     private String GameNum;
     private String Team1Name;
@@ -20,7 +21,8 @@ public class Results {
     
     
 //   Constructor that takes arguments
-    public Results( int roundNum, int gameNum, String team1Name, int team1Score, String team2Name, int team2Score, String winnerName, int winnerScore){
+    public Results( int gameID, int roundNum, int gameNum, String team1Name, int team1Score, String team2Name, int team2Score, String winnerName, int winnerScore){
+        this.GameID = valueOf(gameID);
         this.RoundNum = valueOf(roundNum);
         this.GameNum = valueOf(gameNum);
         this.Team1Name = team1Name;
@@ -32,6 +34,14 @@ public class Results {
     } 
     
 //    Getter/Setter Methods
+    public String getGameID(){
+        return GameID;
+    }
+    
+    public void setGameID(){
+        this.GameID = GameID;
+    }
+    
     public String getRoundNum(){
         return RoundNum;
     }
@@ -99,7 +109,8 @@ public class Results {
     @Override
     public String toString(){
         return "Results{" + 
-                "RoundNum='" + RoundNum + '\'' + 
+                "GameID='" + GameID + '\'' + 
+                ", RoundNum='" + RoundNum + '\'' + 
                 ", GameNum='" + GameNum + '\'' +
                 ", Team1='" + Team1Name + '\'' +
                 ", Team1Score='" + Team1Score + '\'' +

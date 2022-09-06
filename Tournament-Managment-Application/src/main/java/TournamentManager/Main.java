@@ -39,7 +39,7 @@ public class Main {
         }
     }
     
-        public void clearHockeyResults() throws IOException{
+    public void clearHockeyResults() throws IOException{
         try(FileWriter fw = new FileWriter("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyResults.csv", false); 
             PrintWriter pw = new PrintWriter(fw, false)){ 
                 
@@ -52,6 +52,7 @@ public class Main {
         catch (IOException e) {
         }
     }
+    
     
     public void readHockeyTeams() throws IOException{
         String filename = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyTournament.csv";
