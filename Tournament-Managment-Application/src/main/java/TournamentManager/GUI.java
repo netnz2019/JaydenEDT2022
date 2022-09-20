@@ -1,40 +1,37 @@
 package TournamentManager;
 
-import com.opencsv.CSVReader;
+import java.io.*;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  *
  * @author jaydenetheridge
  */
-public class GUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame implements java.io.Serializable {
     ArrayList<String> TeamNames = new ArrayList<>();
-    List<Results> GameResults = new ArrayList<>();
-    List<String[]> Resultslist = new ArrayList<>();
+    static List<Results> GameResults = new ArrayList<>();
+    Results IntialResult = new Results("0", 0, 0, "Null", 0, "Null", 0, "Null", 0);
+    
+
     Results game;
-    String[] nextline;
     
-    
-    
+    String team1Name;
+    String team1Score;
+    String team2Name;
+    String team2Score;
+    String winnerName;
+    String winnerScore; 
+
     static String Team1;
     static String Team2;
     static String Team3;
@@ -44,18 +41,25 @@ public class GUI extends javax.swing.JFrame {
     static String Team7;
     static String Team8;
     
-    final String HockeyResultsFile = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyResults.csv";
-    Path HockeyResultsPath = Paths.get("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyResults.csv");
-    final String HockeyTeamsFile = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyTournament.csv";
+    
+    final String HockeyResultsFile = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/Files/HockeyResults.ser";
+    final String HockeyTeamsFile = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/Files/HockeyTournament.csv";
+    
+    
     
     /**
      * Creates new form Main
      */
     public GUI() {        
         initComponents();
-        hideElements();
+        setElements();
         
+        GameResults.add(IntialResult);
         
+    }
+    
+    public void setIntialResult(){
+        GameResults.add(IntialResult);
     }
     
     public void writeHockeyTeams() throws IOException{
@@ -73,83 +77,72 @@ public class GUI extends javax.swing.JFrame {
         } 
     }
     
-    public void writeHockeyResults() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException{
+    public void writeHockeyResults(){
+        try {
+            try (FileOutputStream fileOut = new FileOutputStream(HockeyResultsFile); 
+                 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+                out.writeObject(GameResults);
+            }
+        }   
         
-        try(FileWriter fw = new FileWriter(HockeyResultsFile, true);
-            ){   
-            
-            
-            // Create Mapping Strategy to arrange the 
-            // column name in order
-            ColumnPositionMappingStrategy mappingStrategy = new ColumnPositionMappingStrategy();
-         
-                        
-            mappingStrategy.setType(Results.class);
-  
-            // Arrange column name as provided in below array.
-            String[] columns = new String[] {"GameID", "RoundNum", "GameNum", "Team1", "Team1Score", "Team2", "Team2Score", "Winner", "WinnerScore"};
-            mappingStrategy.setColumnMapping(columns);
-  
-            // Creating StatefulBeanToCsv object
-            StatefulBeanToCsv beanWriter = new StatefulBeanToCsvBuilder(fw)
-            .withMappingStrategy(mappingStrategy)
-            .build();
-            
-            // Write list to StatefulBeanToCsv object
-            beanWriter.write(GameResults);
-            beanWriter.write(nextline);
-       
-            
-            // closing the writer object
-            fw.close();
-            GameResults.clear();
-        }       
-        
-        catch (IOException e) {
-        }  
+        catch(IOException i) {
+        }
+
+        GameResults.clear();
+        GameResults.add(IntialResult);
         
     }
     
-    public void WriteResults(Results Game) throws FileNotFoundException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException{
-        GameResults.add(Game);
+    public void loadSavedGameResults() throws ClassNotFoundException{
         try{
-            CSVReader reader = new CSVReader(new FileReader(HockeyResultsFile));
-            
-            while ((nextline = reader.readNext()) != null){
-                if (nextline != null){
-                    System.out.println(Arrays.toString(nextline));
-                    
-                }
+            try (FileInputStream fileIn = new FileInputStream(HockeyResultsFile); 
+                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
+                GameResults = (ArrayList) in.readObject();
             }
+            
         }
-        
-        catch (IOException e){
-            System.out.println(e);
-        }
-        
-        writeHockeyResults();
-    }   
     
-    
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
-    public int lineCount() throws FileNotFoundException, IOException{
-        String input;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(HockeyResultsFile));       
-        int count = 0;
-        while((input = bufferedReader.readLine()) != null){
-            count++;
-        }
-        
-        System.out.println("Count : " + count);
-        return count;
+        catch(IOException ioe){
+        } 
     }
 
+    public boolean findResult(String gameid){
+        boolean search = false;
+        for (int index = 0; index < GameResults.size(); index++){
+            search = GameResults.get(index).getGameID().equals(gameid);
+            
+        }
+        return search;
+    }
     
+    public void getResults(String gameid) throws ClassNotFoundException{
+        GameResults.clear();
+        GameResults.add(IntialResult);
+        loadSavedGameResults();
+        for (int index = 0; index < GameResults.size(); index++){
+            if (GameResults.get(index).getGameID().equals(gameid)){
+                
+                team1Name = GameResults.get(index).getTeam1();
+                team1Score = GameResults.get(index).getTeam1Score();
+                team2Name = GameResults.get(index).getTeam2();
+                team2Score = GameResults.get(index).getTeam2Score();
+                winnerName = GameResults.get(index).getWinner();
+                winnerScore = GameResults.get(index).getWinnerScore(); 
+                
+            }
+            
+            else if (!GameResults.get(index).getGameID().equals(gameid)) {
+                team1Name = "";
+                team1Score = "";
+                team2Name = "";
+                team2Score = "";
+                winnerName = "";
+                winnerScore = ""; 
+            }
+        }
+    }
+
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -208,8 +201,8 @@ public class GUI extends javax.swing.JFrame {
         GameNumber = new javax.swing.JLabel();
         Team1Label = new javax.swing.JLabel();
         Team2Label = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        T2EnterScore1 = new javax.swing.JTextField();
+        T1ViewScore = new javax.swing.JTextField();
+        T2ViewScore = new javax.swing.JTextField();
         nameGame5 = new javax.swing.JLabel();
         R1T17 = new javax.swing.JTextField();
         R1T18 = new javax.swing.JTextField();
@@ -222,9 +215,9 @@ public class GUI extends javax.swing.JFrame {
         nameGame8 = new javax.swing.JLabel();
         R1T23 = new javax.swing.JTextField();
         R1T24 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        WinnerView = new javax.swing.JTextField();
         Team1Label2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        WinnerScoreView = new javax.swing.JTextField();
         WinnerScoreLabel1 = new javax.swing.JLabel();
         EnterResults = new javax.swing.JPanel();
         SelectSport2 = new javax.swing.JLabel();
@@ -407,7 +400,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(FIrstRoundLabel)
                                 .addGap(74, 74, 74)
                                 .addComponent(SelectSport)))
-                        .addGap(0, 313, Short.MAX_VALUE))
+                        .addGap(0, 334, Short.MAX_VALUE))
                     .addGroup(ViewTourLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,7 +423,7 @@ public class GUI extends javax.swing.JFrame {
                                         .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(ScoreR1T7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(ScoreR1T8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(270, 596, Short.MAX_VALUE))
+                                .addGap(270, 617, Short.MAX_VALUE))
                             .addGroup(ViewTourLayout.createSequentialGroup()
                                 .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(ViewTourLayout.createSequentialGroup()
@@ -627,6 +620,10 @@ public class GUI extends javax.swing.JFrame {
 
         Team2Label.setText("Team 2 - ");
 
+        T1ViewScore.setEditable(false);
+
+        T2ViewScore.setEditable(false);
+
         nameGame5.setText("Game 1");
 
         R1T17.setEditable(false);
@@ -648,9 +645,9 @@ public class GUI extends javax.swing.JFrame {
 
         R1T22.setEditable(false);
 
-        nameGame7.setText("Game 4");
+        nameGame7.setText("Game 3");
 
-        nameGame8.setText("Game 3");
+        nameGame8.setText("Game 4");
 
         R1T23.setEditable(false);
         R1T23.addActionListener(new java.awt.event.ActionListener() {
@@ -661,7 +658,11 @@ public class GUI extends javax.swing.JFrame {
 
         R1T24.setEditable(false);
 
+        WinnerView.setEditable(false);
+
         Team1Label2.setText("Winner");
+
+        WinnerScoreView.setEditable(false);
 
         WinnerScoreLabel1.setText("Score");
 
@@ -676,71 +677,63 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(RoundNumber)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SelectRoundNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ViewGameLayout.createSequentialGroup()
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T18, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T24, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(ViewGameLayout.createSequentialGroup()
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T20, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T19, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(R1T21, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T22, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(R1T20, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(R1T19, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(R1T17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(R1T18, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ViewGameLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameGame6)
+                            .addGroup(ViewGameLayout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(R1T23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(R1T24, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(ViewGameLayout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(nameGame8))))
                             .addGroup(ViewGameLayout.createSequentialGroup()
                                 .addComponent(nameGame5)
-                                .addGap(118, 118, 118)
-                                .addComponent(nameGame8))
-                            .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addComponent(nameGame6)
-                                .addGap(118, 118, 118)
-                                .addComponent(nameGame7)))))
+                                .addGap(84, 84, 84)
+                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(R1T21, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(R1T22, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(ViewGameLayout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(nameGame7)))))))
                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ViewGameLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(Team1Label)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                                .addComponent(Team2Label)
-                                .addGap(64, 64, 64)))
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(T2EnterScore1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 157, Short.MAX_VALUE))
+                        .addGap(108, 108, 108)
+                        .addComponent(GameNumber)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelectGameNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                                .addComponent(GameNumber)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SelectGameNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72))
+                                .addComponent(Team2Label)
+                                .addGap(18, 18, 18)
+                                .addComponent(T2ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ViewGameLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(Team1Label)
+                                .addGap(18, 18, 18)
+                                .addComponent(T1ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                                        .addComponent(Team1Label2)
-                                        .addGap(23, 23, 23))
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(WinnerScoreLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                .addGap(37, 37, 37))))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(SportsComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(Team1Label2)
+                                .addGap(23, 23, 23))
+                            .addComponent(WinnerView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(WinnerScoreLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WinnerScoreView, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
             .addGroup(ViewGameLayout.createSequentialGroup()
                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ViewGameLayout.createSequentialGroup()
@@ -748,7 +741,10 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(SelectSport1))
                     .addGroup(ViewGameLayout.createSequentialGroup()
                         .addGap(310, 310, 310)
-                        .addComponent(ViewResultsButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ViewResultsButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ViewGameLayout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(SportsComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ViewGameLayout.setVerticalGroup(
@@ -763,60 +759,58 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(ViewGameLayout.createSequentialGroup()
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(SelectRoundNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RoundNumber))
-                        .addGap(18, 18, 18)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nameGame5)
-                            .addComponent(nameGame8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addComponent(R1T23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addComponent(R1T17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nameGame6)
-                            .addComponent(nameGame7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addComponent(R1T22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addComponent(R1T19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(ViewGameLayout.createSequentialGroup()
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RoundNumber)
                             .addComponent(SelectGameNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(GameNumber))
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(18, 18, 18)
+                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Team1Label))
-                                .addGap(80, 80, 80))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Team1Label2)
-                                    .addComponent(WinnerScoreLabel1))
+                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ViewGameLayout.createSequentialGroup()
+                                        .addComponent(nameGame5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(ViewGameLayout.createSequentialGroup()
+                                        .addComponent(nameGame7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(54, 54, 54)
+                                .addComponent(nameGame6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)))
+                                .addComponent(R1T19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(R1T20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ViewGameLayout.createSequentialGroup()
+                                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(ViewGameLayout.createSequentialGroup()
+                                        .addComponent(nameGame8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(ViewGameLayout.createSequentialGroup()
+                                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(T1ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Team1Label))
+                                        .addGap(80, 80, 80)
+                                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(T2ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Team2Label))
+                                        .addGap(16, 16, 16)))
+                                .addComponent(R1T24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(ViewGameLayout.createSequentialGroup()
+                        .addGap(116, 116, 116)
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(T2EnterScore1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Team2Label))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                            .addComponent(Team1Label2)
+                            .addComponent(WinnerScoreLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(WinnerView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(WinnerScoreView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(ViewResultsButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
@@ -928,14 +922,6 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(SelectRoundNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(R1T12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(R1T11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
@@ -944,64 +930,73 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
+                        .addComponent(nameGame2)
+                        .addGap(118, 118, 118)
+                        .addComponent(nameGame4))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(nameGame1)
-                                .addGap(118, 118, 118)
-                                .addComponent(nameGame3))
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(nameGame2)
-                                .addGap(118, 118, 118)
-                                .addComponent(nameGame4)))))
+                            .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(R1T13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(nameGame1)
+                        .addGap(118, 118, 118)
+                        .addComponent(nameGame3)))
                 .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(GameNumber1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelectGameNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SelectGameNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Team2Label1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(Team1Label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Team1Label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Team2Label1))
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                                        .addComponent(WinnerEnterLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(WinnerScoreLabel)
-                                        .addGap(42, 42, 42))
-                                    .addGroup(EnterResultsLayout.createSequentialGroup()
-                                        .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(32, 32, 32))))
                             .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())))))
-            .addGroup(EnterResultsLayout.createSequentialGroup()
-                .addGap(294, 294, 294)
-                .addComponent(SportsComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(291, 291, 291))
-            .addGroup(EnterResultsLayout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(SelectSport2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(WinnerEnterLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(WinnerScoreLabel)
+                                .addGap(42, 42, 42))
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
                         .addComponent(EnterResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
-                        .addComponent(ClearResultsFile, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(170, 170, 170))
+                        .addComponent(ClearResultsFile, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(170, 170, 170))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EnterResultsLayout.createSequentialGroup()
+                        .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128))))
+            .addGroup(EnterResultsLayout.createSequentialGroup()
+                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(SportsComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                        .addGap(269, 269, 269)
+                        .addComponent(SelectSport2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         EnterResultsLayout.setVerticalGroup(
             EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1016,51 +1011,60 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(SelectGameNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RoundNumber1)
                     .addComponent(GameNumber1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameGame1)
-                    .addComponent(nameGame3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nameGame2)
-                            .addComponent(nameGame4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(nameGame1)
+                            .addComponent(nameGame3))
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                                        .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                                        .addComponent(R1T13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(nameGame2)
+                                    .addComponent(nameGame4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                                        .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                                        .addComponent(R1T11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(R1T12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(27, 27, 27))
                             .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(R1T11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(R1T12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27))
+                                .addGap(24, 24, 24)
+                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(EnterResultsLayout.createSequentialGroup()
+                                        .addGap(103, 103, 103)
+                                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Team2Label1)))
+                                    .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Team1Label1)
+                                        .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addComponent(R1T13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(WinnerEnterLabel)
+                            .addComponent(WinnerScoreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(WinnerEnterLabel)
-                                    .addComponent(WinnerScoreLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Team2Label1)))
-                            .addComponent(Team1Label1))
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1179,7 +1183,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
                 .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SetupTourLayout.createSequentialGroup()
-                        .addContainerGap(189, Short.MAX_VALUE)
+                        .addContainerGap(210, Short.MAX_VALUE)
                         .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(SetupTourLayout.createSequentialGroup()
                                 .addComponent(Team1Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1211,7 +1215,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(280, 280, 280))
             .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
-                    .addContainerGap(323, Short.MAX_VALUE)
+                    .addContainerGap(344, Short.MAX_VALUE)
                     .addComponent(ErrorPreventionTeamSetup1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(270, 270, 270)))
         );
@@ -1273,9 +1277,224 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SportsComboBox1ActionPerformed
 
     private void ViewResultsButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewResultsButttonActionPerformed
+        String SportType = SportsComboBox1.getSelectedItem().toString();
+        String RoundNum = SelectRoundNumber.getSelectedItem().toString();
+        String GameNum = SelectGameNumber.getSelectedItem().toString();
+        
+        if (SportType.equals("Select a Sport")){
+            ErrorPreventionResultsEnter.setText("Please select a sport.");
+        }
+        
+        else if (SportType.equals("Hockey")){
+            switch (RoundNum) {
+                case "Select Round Number" -> ErrorPreventionResultsEnter.setText("Please select a Round Number.");
+                case "First Round" -> {
+                    Main Main = new Main();
+                    try {
+                        Main.readHockeyTeams();
+                        R1T17.setText(Team1);
+                        R1T18.setText(Team2);
+                        R1T19.setText(Team3);
+                        R1T20.setText(Team4);
+                        R1T21.setText(Team5);
+                        R1T22.setText(Team6);
+                        R1T23.setText(Team7);
+                        R1T24.setText(Team8);
+                    }
+                    
+                    catch (IOException ex) {
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }   
+                    
+                    switch (GameNum) {
+                        case "Select Game Number" -> {
+                            Team1Label.setText("Team 1 - ");
+                            Team2Label.setText("Team 2 - ");
+                            
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            T1ViewScore.setText("");
+                            T2ViewScore.setText("");
+                            WinnerView.setText("");
+                            WinnerScoreView.setText("");
+                        }
+                        
+                        case "1" -> {
+                            Team1Label.setText("Team 1 - " + Team1);
+                            Team2Label.setText("Team 2 - " + Team2);
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            try {
+                                getResults("1");
+                                                            
+                                T1ViewScore.setText(team1Score);
+                                T2ViewScore.setText(team2Score);
+                                WinnerView.setText(winnerName);
+                                WinnerScoreView.setText(winnerScore);
+                            
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                                ErrorPreventionResultsEnter.setText("Game is not found?");
+                            }   
+                        }
+                        
+                        case "2" -> {
+                            Team1Label.setText("Team 1 - " + Team3);
+                            Team2Label.setText("Team 2 - " + Team4);
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            try {
+                                getResults("2");
+                                                            
+                                T1ViewScore.setText(team1Score);
+                                T2ViewScore.setText(team2Score);
+                                WinnerView.setText(winnerName);
+                                WinnerScoreView.setText(winnerScore);
+                                
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                                ErrorPreventionResultsEnter.setText("Game is not found?");
+                            }   
+                        }
+                        
+                        case "3" -> {
+                            Team1Label.setText("Team 1 - " + Team5);
+                            Team2Label.setText("Team 2 - " + Team6);
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            try {
+                                getResults("3");
+                                                            
+                                T1ViewScore.setText(team1Score);
+                                T2ViewScore.setText(team2Score);
+                                WinnerView.setText(winnerName);
+                                WinnerScoreView.setText(winnerScore);
+                            
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                                ErrorPreventionResultsEnter.setText("Game is not found?");
+                            }   
+                        }
+                        
+                        case "4" -> {
+                            Team1Label.setText("Team 1 - " + Team7);
+                            Team2Label.setText("Team 2 - " + Team8);
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            try {
+                                getResults("4");
+                                
+                                T1ViewScore.setText(team1Score);
+                                T2ViewScore.setText(team2Score);
+                                WinnerView.setText(winnerName);
+                                WinnerScoreView.setText(winnerScore);
+                            
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                                ErrorPreventionResultsEnter.setText("Game is not found?");
+                            }   
+                        }
+                        
+                        default -> {
+                            }
+                    }
+                }
+                case "Semi Finals" -> {
+                    switch (GameNum) {
+                        case "Select Game Number" -> {
+                            Team1Label.setText("Team 1 - ");
+                            Team2Label.setText("Team 2 - ");
+                            ErrorPreventionResultsEnter.setText("");
+                        }
+                        
+                        case "1" -> {
+                            Team1Label.setText("Team 1 - " + Team1);
+                            Team2Label.setText("Team 2 - " + Team2);
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            try {
+                                getResults("5");
+                                
+                                T1ViewScore.setText(team1Score);
+                                T2ViewScore.setText(team2Score);
+                                WinnerView.setText(winnerName);
+                                WinnerScoreView.setText(winnerScore);
+                            
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                                ErrorPreventionResultsEnter.setText("Game is not found?");
+                            }   
+                        }
+                        
+                        case "2" -> {
+                            Team1Label.setText("Team 1 - " + Team3);
+                            Team2Label.setText("Team 2 - " + Team4);
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            try {
+                                getResults("6");
+                                
+                                T1ViewScore.setText(team1Score);
+                                T2ViewScore.setText(team2Score);
+                                WinnerView.setText(winnerName);
+                                WinnerScoreView.setText(winnerScore);
+                            
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                                ErrorPreventionResultsEnter.setText("Game is not found?");
+                            }   
+                        }
+                        
+                        default -> {
+                            Team1Label.setText("Team 1 - ");
+                            Team2Label.setText("Team 2 - ");
+                            ErrorPreventionResultsEnter.setText("Game Number Not Found in Currently Selected Round");
+                        }
+                    }
+                }
+                case "Finals" -> {
+                    
+                    switch (GameNum) {
+                        case "Select Game Number" -> {
+                            Team1Label.setText("Team 1 - ");
+                            Team2Label.setText("Team 2 - ");
+                            ErrorPreventionResultsEnter.setText("");  
+                        }
+                        
+                        case "1" -> {
+                            Team1Label.setText("Team 1 - " + Team1);
+                            Team2Label.setText("Team 2 - " + Team2);
+                            ErrorPreventionResultsEnter.setText("");
+                            
+                            try {
+                                getResults("7");
+                                
+                                T1ViewScore.setText(team1Score);
+                                T2ViewScore.setText(team2Score);
+                                WinnerView.setText(winnerName);
+                                WinnerScoreView.setText(winnerScore);
+                                
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
+                        }
+                        
+                        default -> {
+                            Team1Label.setText("Team 1 - ");
+                            Team2Label.setText("Team 2 - ");
+                            ErrorPreventionResultsEnter.setText("Game Number Not Found in Currently Selected Round");
+                        }
+                    }
+                }
+                
+                default -> {
+                }
+            }
+        }
         try {
-            lineCount();
-        } catch (IOException ex) {
+            loadSavedGameResults();
+            System.out.print(GameResults.size());
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ViewResultsButttonActionPerformed
@@ -1319,7 +1538,169 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SetupTourButttonActionPerformed
 
     private void SelectRoundNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRoundNumberActionPerformed
-        // TODO add your handling code here:
+        String SportType = SportsComboBox1.getSelectedItem().toString();
+        String RoundNum = SelectRoundNumber.getSelectedItem().toString();
+        
+        if (SportType.equals("Select a Sport")){
+            ErrorPreventionResultsEnter.setText("Please select a sport.");
+        }
+        
+        else if (SportType.equals("Hockey")){
+            ErrorPreventionResultsEnter.setText("");
+            switch (RoundNum) {
+                case "Select Round Number" -> {
+                    nameGame5.setVisible(true);
+                    nameGame6.setVisible(true);
+                    nameGame7.setVisible(true);
+                    nameGame8.setVisible(true);
+                    
+                    R1T17.setVisible(true);
+                    R1T18.setVisible(true);
+                    R1T19.setVisible(true);
+                    R1T20.setVisible(true);
+                    R1T21.setVisible(true);
+                    R1T22.setVisible(true);
+                    R1T23.setVisible(true);
+                    R1T24.setVisible(true);
+                    
+                    R1T17.setText("");
+                    R1T18.setText("");
+                    R1T19.setText("");
+                    R1T20.setText("");
+                    R1T21.setText("");
+                    R1T22.setText("");
+                    R1T23.setText("");
+                    R1T24.setText("");
+                }
+                
+                case "First Round" ->   {
+                    SelectGameNumber.removeAllItems();
+                    SelectGameNumber.addItem("Select Game Number");
+                    SelectGameNumber.addItem("1");
+                    SelectGameNumber.addItem("2");
+                    SelectGameNumber.addItem("3");
+                    SelectGameNumber.addItem("4");
+                    
+                        nameGame5.setVisible(true);
+                        nameGame6.setVisible(true);
+                        nameGame7.setVisible(true);
+                        nameGame8.setVisible(true);
+                        
+                        R1T17.setVisible(true);
+                        R1T18.setVisible(true);
+                        R1T19.setVisible(true);
+                        R1T20.setVisible(true);
+                        R1T21.setVisible(true);
+                        R1T22.setVisible(true);
+                        R1T23.setVisible(true);
+                        R1T24.setVisible(true);
+                        
+                        Main Main = new Main();
+                        try {
+                            Main.readHockeyTeams();
+                            R1T17.setText(Team1);
+                            R1T18.setText(Team2);
+                            R1T19.setText(Team3);
+                            R1T20.setText(Team4);
+                            R1T21.setText(Team5);
+                            R1T22.setText(Team6);
+                            R1T23.setText(Team7);
+                            R1T24.setText(Team8);
+                        }
+                        
+                        catch (IOException ex) {
+                            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                        } 
+                }
+                
+                case "Semi Finals" ->                     {
+                    SelectGameNumber.removeAllItems();
+                    SelectGameNumber.addItem("Select Game Number");
+                    SelectGameNumber.addItem("1");
+                    SelectGameNumber.addItem("2");
+                    
+                        nameGame5.setVisible(true);
+                        nameGame6.setVisible(true);
+                        nameGame7.setVisible(false);
+                        nameGame8.setVisible(false);
+                        
+                        R1T17.setVisible(true);
+                        R1T18.setVisible(true);
+                        R1T19.setVisible(true);
+                        R1T20.setVisible(true);
+                        R1T21.setVisible(false);
+                        R1T22.setVisible(false);
+                        R1T23.setVisible(false);
+                        R1T24.setVisible(false);
+                        
+                try {
+                    getResults("1");
+                    R1T17.setText(winnerName);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    getResults("2");
+                    R1T18.setText(winnerName);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    getResults("3");
+                    R1T19.setText(winnerName);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    getResults("4");
+                    R1T20.setText(winnerName);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                }
+                
+                case "Finals" ->                     {
+                    SelectGameNumber.removeAllItems();
+                    SelectGameNumber.addItem("Select Game Number");
+                    SelectGameNumber.addItem("1");
+                    
+                        nameGame5.setVisible(true);
+                        nameGame6.setVisible(false);
+                        nameGame7.setVisible(false);
+                        nameGame8.setVisible(false);
+                        
+                        R1T17.setVisible(true);
+                        R1T18.setVisible(true);
+                        R1T19.setVisible(false);
+                        R1T20.setVisible(false);
+                        R1T21.setVisible(false);
+                        R1T22.setVisible(false);
+                        R1T23.setVisible(false);
+                        R1T24.setVisible(false);
+                        
+                try {
+                    getResults("5");
+                    R1T17.setText(winnerName);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    getResults("6");
+                    R1T18.setText(winnerName);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+                
+                default -> {
+                }
+            }
+        }
     }//GEN-LAST:event_SelectRoundNumberActionPerformed
 
     private void SelectGameNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectGameNumberActionPerformed
@@ -1340,116 +1721,326 @@ public class GUI extends javax.swing.JFrame {
         }
         
         else if (SportType.equals("Hockey")){
-            if (RoundNum.equals("Select Round Number")){
-                ErrorPreventionResultsEnter.setText("Please select a Round Number.");
+            switch (RoundNum) {
+                case "Select Round Number" -> ErrorPreventionResultsEnter.setText("Please select a Round Number.");
+                case "First Round" -> {
+                switch (GameNum) {
+                    case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
+                    case "1" ->                         {
+                            String Team1Score = T1EnterScore.getText();
+                            int Score1 = Integer.parseInt(Team1Score);
+                            
+                            String Team2Score = T2EnterScore.getText();
+                            int Score2 = Integer.parseInt(Team2Score);
+                            
+                            String WinnerName = WinnerEnter.getText();
+                            
+                            String WinnerScore = WinnerScoreEnter.getText();
+                            int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
+                            
+                            game = new Results("1", 1, 1, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
+                            
+                            for (int index = 0; index < GameResults.size(); index++){
+                                if (GameResults.get(index).getGameID().equals("1")){
+                                    GameResults.set(index, game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
+                                    break;
+                                }
+                                
+                                else{
+                                    GameResults.add(game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                    break;
+                                }
+                            }   
+                            
+                            T1EnterScore.setText("");
+                            T2EnterScore.setText("");
+                            WinnerEnter.setText("");
+                            WinnerScoreEnter.setText("");
+                            ErrorPreventionResultsEnter.setText("");
+                        }
+                    
+                    case "2" ->                         {
+                            String Team1Score = T1EnterScore.getText();
+                            int Score1 = Integer.parseInt(Team1Score);
+                            
+                            String Team2Score = T2EnterScore.getText();
+                            int Score2 = Integer.parseInt(Team2Score);
+                            
+                            String WinnerName = WinnerEnter.getText();
+                            
+                            String WinnerScore = WinnerScoreEnter.getText();
+                            int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            game = new Results("2", 1, 2, Team3, Score1, Team4, Score2, WinnerName, winnerScoreEnter);
+                            
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
+                            
+                            for (int index = 0; index < GameResults.size(); index++){
+                                if (GameResults.get(index).getGameID().equals("2")){
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
+                                    GameResults.set(index, game);
+                                    writeHockeyResults();
+                                    break;
+                                }
+                                
+                                else{
+                                    GameResults.add(game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                    break;
+                                }
+                            }   
+                            
+                            T1EnterScore.setText("");
+                            T2EnterScore.setText("");
+                            WinnerEnter.setText("");
+                            WinnerScoreEnter.setText("");
+                        }
+                    
+                    case "3" ->                         {
+                            String Team1Score = T1EnterScore.getText();
+                            int Score1 = Integer.parseInt(Team1Score);
+                            
+                            String Team2Score = T2EnterScore.getText();
+                            int Score2 = Integer.parseInt(Team2Score);
+                            
+                            String WinnerName = WinnerEnter.getText();
+                            
+                            String WinnerScore = WinnerScoreEnter.getText();
+                            int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            game = new Results("3", 1, 3, Team5, Score1, Team6, Score2, WinnerName, winnerScoreEnter);
+                            
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
+                            
+                            for (int index = 0; index < GameResults.size(); index++){
+                                if (GameResults.get(index).getGameID().equals("3")){
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already Existing result would you like to continue?");
+                                    GameResults.set(index, game);
+                                    writeHockeyResults();
+                                    break;
+                                }
+                                
+                                else{
+                                    GameResults.add(game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                    break;
+                                }
+                            }   
+                            
+                            T1EnterScore.setText("");
+                            T2EnterScore.setText("");
+                            WinnerEnter.setText("");
+                            WinnerScoreEnter.setText("");
+                        }
+                    
+                    case "4" ->                         {
+                            String Team1Score = T1EnterScore.getText();
+                            int Score1 = Integer.parseInt(Team1Score);
+                            
+                            String Team2Score = T2EnterScore.getText();
+                            int Score2 = Integer.parseInt(Team2Score);
+                            
+                            String WinnerName = WinnerEnter.getText();
+                            
+                            String WinnerScore = WinnerScoreEnter.getText();
+                            int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            game = new Results("4", 1, 4, Team7, Score1, Team8, Score2, WinnerName, winnerScoreEnter);
+                            
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
+                            
+                            for (int index = 0; index < GameResults.size(); index++){
+                                if (GameResults.get(index).getGameID().equals("4")){
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already Existing result would you like to continue?");
+                                    GameResults.set(index, game);
+                                    writeHockeyResults();
+                                    break;
+                                }
+                                
+                                else{
+                                    GameResults.add(game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                    break;
+                                }
+                            }   
+                            
+                            T1EnterScore.setText("");
+                            T2EnterScore.setText("");
+                            WinnerEnter.setText("");
+                            WinnerScoreEnter.setText("");
+                        }
+                    default -> {
+                    }
+                }
+                }
+                
+                case "Semi Finals" -> {
+                    switch (GameNum) {
+                        case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
+                        case "1" ->                         {
+                            String Team1Score = T1EnterScore.getText();
+                            int Score1 = Integer.parseInt(Team1Score);
+                            
+                            String Team2Score = T2EnterScore.getText();
+                            int Score2 = Integer.parseInt(Team2Score);
+                            
+                            String WinnerName = WinnerEnter.getText();
+                            
+                            String WinnerScore = WinnerScoreEnter.getText();
+                            int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            game = new Results("5", 2, 1, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
+                            
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }       
+
+                            for (int index = 0; index < GameResults.size(); index++){
+                                if (GameResults.get(index).getGameID().equals("5")){
+                                    GameResults.set(index, game);
+                                    writeHockeyResults();
+                                    break;
+                                }
+                                
+                                else{
+                                    GameResults.add(game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                    break;
+                                }
+                            }       
+                            
+                            T1EnterScore.setText("");
+                            T2EnterScore.setText("");
+                            WinnerEnter.setText("");
+                            WinnerScoreEnter.setText("");
+                            ErrorPreventionResultsEnter.setText("");
+                        }
+                        
+                        case "2" ->                         {
+                            String Team1Score = T1EnterScore.getText();
+                            int Score1 = Integer.parseInt(Team1Score);
+                            
+                            String Team2Score = T2EnterScore.getText();
+                            int Score2 = Integer.parseInt(Team2Score);
+                            
+                            String WinnerName = WinnerEnter.getText();
+                            
+                            String WinnerScore = WinnerScoreEnter.getText();
+                            int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            game = new Results("6", 2, 2, Team3, Score1, Team4, Score2, WinnerName, winnerScoreEnter);
+                            
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }       
+                            
+                            for (int index = 0; index < GameResults.size(); index++){
+                                if (GameResults.get(index).getGameID().equals("6")){
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
+                                    GameResults.set(index, game);
+                                    writeHockeyResults();
+                                    break;
+                                }
+                                
+                                else{
+                                    GameResults.add(game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                    break;
+                                }
+                            }      
+                            
+                            T1EnterScore.setText("");
+                            T2EnterScore.setText("");
+                            WinnerEnter.setText("");
+                            WinnerScoreEnter.setText("");
+                        }
+                        
+                case "Finals" -> {
+                    switch (GameNum) {
+                        case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
+                        case "1" ->                         {
+                            String Team1Score = T1EnterScore.getText();
+                            int Score1 = Integer.parseInt(Team1Score);
+                            
+                            String Team2Score = T2EnterScore.getText();
+                            int Score2 = Integer.parseInt(Team2Score);
+                            
+                            String WinnerName = WinnerEnter.getText();
+                            
+                            String WinnerScore = WinnerScoreEnter.getText();
+                            int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            game = new Results("7", 3, 1, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
+                            
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }       
+
+                            for (int index = 0; index < GameResults.size(); index++){
+                                if (GameResults.get(index).getGameID().equals("7")){
+                                    GameResults.set(index, game);
+                                    writeHockeyResults();
+                                    break;
+                                }
+                                
+                                else{
+                                    GameResults.add(game);
+                                    writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
+                                    break;
+                                }
+                            }       
+                            
+                            T1EnterScore.setText("");
+                            T2EnterScore.setText("");
+                            WinnerEnter.setText("");
+                            WinnerScoreEnter.setText("");
+                            ErrorPreventionResultsEnter.setText("");
+                        }
+                        
+                        default -> {
+                                }
+                    }
+                }
+                default -> {
+                }
             }
-            
-            else if (RoundNum.equals("First Round")){
-                if (GameNum.equals("Select Game Number")){
-                    ErrorPreventionResultsEnter.setText("Please select a Game Number.");
-                }
-                else if (GameNum.equals("1")){
-                    String Team1Score = T1EnterScore.getText();
-                    int team1Score = Integer.parseInt(Team1Score);
-                    
-                    String Team2Score = T2EnterScore.getText();
-                    int team2Score = Integer.parseInt(Team2Score);
-                    
-                    String WinnerName = WinnerEnter.getText();
-                    
-                    String WinnerScore = WinnerScoreEnter.getText();
-                    int winnerScoreEnter = Integer.parseInt(WinnerScore);
-                    
-                    game = new Results(1, 1, 1, Team1, team1Score, Team2, team2Score, WinnerName, winnerScoreEnter);
-                    
-                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
-                                                          
-                    try {
-                        WriteResults(game);
-                    } 
-                    
-                    catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException ex) {
-                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                
-                else if (GameNum.equals("2")){
-                    String Team1Score = T1EnterScore.getText();
-                    int team1Score = Integer.parseInt(Team1Score);
-                    
-                    String Team2Score = T2EnterScore.getText();
-                    int team2Score = Integer.parseInt(Team2Score);
-                    
-                    String WinnerName = WinnerEnter.getText();
-                    
-                    String WinnerScore = WinnerScoreEnter.getText();
-                    int winnerScoreEnter = Integer.parseInt(WinnerScore);
-                    
-                    game = new Results(2, 1, 2, Team3, team1Score, Team4, team2Score, WinnerName, winnerScoreEnter);                
-                    
-                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
-                                                          
-                    try {
-                        WriteResults(game);
-                    } 
-                    
-                    catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException ex) {
-                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                
-                else if (GameNum.equals("3")){
-                    String Team1Score = T1EnterScore.getText();
-                    int team1Score = Integer.parseInt(Team1Score);
-                    
-                    String Team2Score = T2EnterScore.getText();
-                    int team2Score = Integer.parseInt(Team2Score);
-                    
-                    String WinnerName = WinnerEnter.getText();
-                    
-                    String WinnerScore = WinnerScoreEnter.getText();
-                    int winnerScoreEnter = Integer.parseInt(WinnerScore);
-                    
-                    game = new Results(3, 1, 3, Team5, team1Score, Team6, team2Score, WinnerName, winnerScoreEnter);
-                    
-                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
-                                                          
-                    try {
-                        WriteResults(game);
-                    } 
-                    
-                    catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException ex) {
-                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                
-                else if (GameNum.equals("4")){
-                    String Team1Score = T1EnterScore.getText();
-                    int team1Score = Integer.parseInt(Team1Score);
-                    
-                    String Team2Score = T2EnterScore.getText();
-                    int team2Score = Integer.parseInt(Team2Score);
-                    
-                    String WinnerName = WinnerEnter.getText();
-                    
-                    String WinnerScore = WinnerScoreEnter.getText();
-                    int winnerScoreEnter = Integer.parseInt(WinnerScore);
-                    
-                    game = new Results(4, 1, 4, Team7, team1Score, Team8, team2Score, WinnerName, winnerScoreEnter);
-                    
-                    ErrorPreventionResultsEnter.setText("Game Results Entered.");
-                                                          
-                    try {
-                        WriteResults(game);
-                    } 
-                    
-                    catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException ex) {
-                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                 }
             }
-        }
-        
+        }    
     }//GEN-LAST:event_EnterResultsButtonActionPerformed
 
     private void SelectRoundNumber1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRoundNumber1ActionPerformed
@@ -1460,109 +2051,124 @@ public class GUI extends javax.swing.JFrame {
             ErrorPreventionResultsEnter.setText("Please select a sport.");
         }
         
-        else if (SportType.equals("Hockey")){               
-            if (RoundNum.equals("Select Round Number")){
-                nameGame1.setVisible(false);
-                nameGame2.setVisible(false);
-                nameGame3.setVisible(false);
-                nameGame4.setVisible(false);
-                
-                R1T9.setVisible(false);
-                R1T10.setVisible(false);
-                R1T11.setVisible(false);
-                R1T12.setVisible(false);
-                R1T13.setVisible(false);
-                R1T14.setVisible(false);
-                R1T15.setVisible(false);
-                R1T16.setVisible(false);
-            }
-            
-            else if (RoundNum.equals("First Round")){
-                nameGame1.setVisible(true);
-                nameGame2.setVisible(true);
-                nameGame3.setVisible(true);
-                nameGame4.setVisible(true);
-                
-                R1T9.setVisible(true);
-                R1T10.setVisible(true);
-                R1T11.setVisible(true);
-                R1T12.setVisible(true);
-                R1T13.setVisible(true);
-                R1T14.setVisible(true);
-                R1T15.setVisible(true);
-                R1T16.setVisible(true);
-                
-                Main Main = new Main();
-                try {
-                    Main.readHockeyTeams();
-                    R1T9.setText(Team1);
-                    R1T10.setText(Team2);
-                    R1T11.setText(Team3);
-                    R1T12.setText(Team4);
-                    R1T13.setText(Team5);
-                    R1T14.setText(Team6);
-                    R1T15.setText(Team7);
-                    R1T16.setText(Team8);
-                } 
-        
-                catch (IOException ex) {
-                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        else if (SportType.equals("Hockey")){
+            ErrorPreventionResultsEnter.setText("");
+            switch (RoundNum) {
+                case "Select Round Number" -> {
+                    nameGame1.setVisible(true);
+                    nameGame2.setVisible(true);
+                    nameGame3.setVisible(true);
+                    nameGame4.setVisible(true);
+                    
+                    R1T9.setVisible(true);
+                    R1T10.setVisible(true);
+                    R1T11.setVisible(true);
+                    R1T12.setVisible(true);
+                    R1T13.setVisible(true);
+                    R1T14.setVisible(true);
+                    R1T15.setVisible(true);
+                    R1T16.setVisible(true);
+                    
+                    R1T9.setText("");
+                    R1T10.setText("");
+                    R1T11.setText("");
+                    R1T12.setText("");
+                    R1T13.setText("");
+                    R1T14.setText("");
+                    R1T15.setText("");
+                    R1T16.setText("");
                 }
-            }
-            
-            else if (RoundNum.equals("Semi Finals")){
-                nameGame1.setVisible(true);
-                nameGame2.setVisible(true);
-                nameGame3.setVisible(false);
-                nameGame4.setVisible(false);
                 
-                R1T9.setVisible(true);
-                R1T10.setVisible(true);
-                R1T11.setVisible(true);
-                R1T12.setVisible(true);
-                R1T13.setVisible(false);
-                R1T14.setVisible(false);
-                R1T15.setVisible(false);
-                R1T16.setVisible(false);
-                
-                Main Main = new Main();
-                try {
-                    Main.readHockeyTeams();
-                    R1T9.setText(Team1);
-                    R1T10.setText(Team2);
-                    R1T11.setText(Team3);
-                    R1T12.setText(Team4);
-                } 
-        
-                catch (IOException ex) {
-                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                case "First Round" ->                     {
+                        nameGame1.setVisible(true);
+                        nameGame2.setVisible(true);
+                        nameGame3.setVisible(true);
+                        nameGame4.setVisible(true);
+                        
+                        R1T9.setVisible(true);
+                        R1T10.setVisible(true);
+                        R1T11.setVisible(true);
+                        R1T12.setVisible(true);
+                        R1T13.setVisible(true);
+                        R1T14.setVisible(true);
+                        R1T15.setVisible(true);
+                        R1T16.setVisible(true);
+                        
+                        Main Main = new Main();
+                        try {
+                            Main.readHockeyTeams();
+                            R1T9.setText(Team1);
+                            R1T10.setText(Team2);
+                            R1T11.setText(Team3);
+                            R1T12.setText(Team4);
+                            R1T13.setText(Team5);
+                            R1T14.setText(Team6);
+                            R1T15.setText(Team7);
+                            R1T16.setText(Team8);
+                        }
+                        
+                        catch (IOException ex) {
+                            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }  
                 }
-            }
-            
-            else if (RoundNum.equals("Finals")){
-                nameGame1.setVisible(true);
-                nameGame2.setVisible(false);
-                nameGame3.setVisible(false);
-                nameGame4.setVisible(false);
                 
-                R1T9.setVisible(true);
-                R1T10.setVisible(true);
-                R1T11.setVisible(false);
-                R1T12.setVisible(false);
-                R1T13.setVisible(false);
-                R1T14.setVisible(false);
-                R1T15.setVisible(false);
-                R1T16.setVisible(false);
+                case "Semi Finals" ->                     {
+                        nameGame1.setVisible(true);
+                        nameGame2.setVisible(true);
+                        nameGame3.setVisible(false);
+                        nameGame4.setVisible(false);
+                        
+                        R1T9.setVisible(true);
+                        R1T10.setVisible(true);
+                        R1T11.setVisible(true);
+                        R1T12.setVisible(true);
+                        R1T13.setVisible(false);
+                        R1T14.setVisible(false);
+                        R1T15.setVisible(false);
+                        R1T16.setVisible(false);
+                        
+                        Main Main = new Main();
+                        try {
+                            Main.readHockeyTeams();
+                            R1T9.setText(Team1);
+                            R1T10.setText(Team2);
+                            R1T11.setText(Team3);
+                            R1T12.setText(Team4);
+                        }
+                        
+                        catch (IOException ex) {
+                            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }   
+                }
                 
-                Main Main = new Main();
-                try {
-                    Main.readHockeyTeams();
-                    R1T9.setText(Team1);
-                    R1T10.setText(Team2);
-                } 
-        
-                catch (IOException ex) {
-                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                case "Finals" ->                     {
+                        nameGame1.setVisible(true);
+                        nameGame2.setVisible(false);
+                        nameGame3.setVisible(false);
+                        nameGame4.setVisible(false);
+                        
+                        R1T9.setVisible(true);
+                        R1T10.setVisible(true);
+                        R1T11.setVisible(false);
+                        R1T12.setVisible(false);
+                        R1T13.setVisible(false);
+                        R1T14.setVisible(false);
+                        R1T15.setVisible(false);
+                        R1T16.setVisible(false);
+                        
+                        Main Main = new Main();
+                        try {
+                            Main.readHockeyTeams();
+                            R1T9.setText(Team1);
+                            R1T10.setText(Team2);
+                        }
+                        
+                        catch (IOException ex) {
+                            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }       
+                }
+                
+                default -> {
                 }
             }
         }
@@ -1578,85 +2184,93 @@ public class GUI extends javax.swing.JFrame {
         }
         
         else if (SportType.equals("Hockey")){               
-            if (RoundNum.equals("Select Round Number")){
-               ErrorPreventionResultsEnter.setText("Please select a Round Number.");
-            }
-            
-            else if (RoundNum.equals("First Round")){
-                if (GameNum.equals("Select Game Number")){
-                    Team1Label1.setText("Team 1 - ");
-                    Team2Label1.setText("Team 2 - ");
-                    ErrorPreventionResultsEnter.setText("");
+            switch (RoundNum) {
+                case "Select Round Number" -> ErrorPreventionResultsEnter.setText("Please select a Round Number.");
+                case "First Round" -> {
+                switch (GameNum) {
+                    case "Select Game Number" -> {
+                        Team1Label1.setText("Team 1 - ");
+                        Team2Label1.setText("Team 2 - ");
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    case "1" -> {
+                        Team1Label1.setText("Team 1 - " + Team1);
+                        Team2Label1.setText("Team 2 - " + Team2);
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    case "2" -> {
+                        Team1Label1.setText("Team 1 - " + Team3);
+                        Team2Label1.setText("Team 2 - " + Team4);
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    case "3" -> {
+                        Team1Label1.setText("Team 1 - " + Team5);
+                        Team2Label1.setText("Team 2 - " + Team6);
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    case "4" -> {
+                        Team1Label1.setText("Team 1 - " + Team7);
+                        Team2Label1.setText("Team 2 - " + Team8);
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    default -> {
+                    }
                 }
-            
-                else if (GameNum.equals("1")){
-                    Team1Label1.setText("Team 1 - " + Team1);
-                    Team2Label1.setText("Team 2 - " + Team2);
-                    ErrorPreventionResultsEnter.setText("");
                 }
-            
-                else if (GameNum.equals("2")){
-                    Team1Label1.setText("Team 1 - " + Team3);
-                    Team2Label1.setText("Team 2 - " + Team4);
-                    ErrorPreventionResultsEnter.setText("");
+                case "Semi Finals" -> {
+                switch (GameNum) {
+                    case "Select Game Number" -> {
+                        Team1Label1.setText("Team 1 - ");
+                        Team2Label1.setText("Team 2 - ");
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    case "1" -> {
+                        Team1Label1.setText("Team 1 - " + Team1);
+                        Team2Label1.setText("Team 2 - " + Team2);
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    case "2" -> {
+                        Team1Label1.setText("Team 1 - " + Team3);
+                        Team2Label1.setText("Team 2 - " + Team4);
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    default -> {
+                        Team1Label1.setText("Team 1 - ");
+                        Team2Label1.setText("Team 2 - ");
+                        ErrorPreventionResultsEnter.setText("Game Number Not Found in Currently Selected Round");
+                    }
                 }
-            
-                else if (GameNum.equals("3")){
-                    Team1Label1.setText("Team 1 - " + Team5);
-                    Team2Label1.setText("Team 2 - " + Team6);
-                    ErrorPreventionResultsEnter.setText("");
                 }
-            
-                else if (GameNum.equals("4")){
-                    Team1Label1.setText("Team 1 - " + Team7);
-                    Team2Label1.setText("Team 2 - " + Team8);
-                    ErrorPreventionResultsEnter.setText("");
+                case "Finals" -> {
+                switch (GameNum) {
+                    case "Select Game Number" -> {
+                        Team1Label1.setText("Team 1 - ");
+                        Team2Label1.setText("Team 2 - ");
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    case "1" -> {
+                        Team1Label1.setText("Team 1 - " + Team1);
+                        Team2Label1.setText("Team 2 - " + Team2);
+                        ErrorPreventionResultsEnter.setText("");
+                    }
+                    
+                    default -> {
+                        Team1Label1.setText("Team 1 - ");
+                        Team2Label1.setText("Team 2 - ");
+                        ErrorPreventionResultsEnter.setText("Game Number Not Found in Currently Selected Round");
+                    }
                 }
-            }
-            
-            else if (RoundNum.equals("Semi Finals")){
-                if (GameNum.equals("Select Game Number")){
-                    Team1Label1.setText("Team 1 - ");
-                    Team2Label1.setText("Team 2 - ");
-                    ErrorPreventionResultsEnter.setText("");
                 }
-            
-                else if (GameNum.equals("1")){
-                    Team1Label1.setText("Team 1 - " + Team1);
-                    Team2Label1.setText("Team 2 - " + Team2);
-                    ErrorPreventionResultsEnter.setText("");
-                }
-            
-                else if (GameNum.equals("2")){
-                    Team1Label1.setText("Team 1 - " + Team3);
-                    Team2Label1.setText("Team 2 - " + Team4);
-                    ErrorPreventionResultsEnter.setText("");
-                }
-            
-                else {
-                    Team1Label1.setText("Team 1 - ");
-                    Team2Label1.setText("Team 2 - ");
-                    ErrorPreventionResultsEnter.setText("Game Number Not Found in Currently Selected Round");
-                }
-            }
-            
-            else if (RoundNum.equals("Finals")){
-                if (GameNum.equals("Select Game Number")){
-                    Team1Label1.setText("Team 1 - ");
-                    Team2Label1.setText("Team 2 - ");
-                    ErrorPreventionResultsEnter.setText("");
-                }
-            
-                else if (GameNum.equals("1")){
-                    Team1Label1.setText("Team 1 - " + Team1);
-                    Team2Label1.setText("Team 2 - " + Team2);
-                    ErrorPreventionResultsEnter.setText("");
-                }
-            
-                else {
-                    Team1Label1.setText("Team 1 - ");
-                    Team2Label1.setText("Team 2 - ");
-                    ErrorPreventionResultsEnter.setText("Game Number Not Found in Currently Selected Round");
+                default -> {
                 }
             }
         }
@@ -1800,20 +2414,29 @@ public class GUI extends javax.swing.JFrame {
         
     }
     
-    private void hideElements(){
-        nameGame1.setVisible(false);
-        nameGame2.setVisible(false);
-        nameGame3.setVisible(false);
-        nameGame4.setVisible(false);
-        
-        R1T9.setVisible(false);
-        R1T10.setVisible(false);
-        R1T11.setVisible(false);
-        R1T12.setVisible(false);
-        R1T13.setVisible(false);
-        R1T14.setVisible(false);
-        R1T15.setVisible(false);
-        R1T16.setVisible(false);
+    private void setElements(){
+        nameGame1.setVisible(true);
+        nameGame2.setVisible(true);
+        nameGame3.setVisible(true);
+        nameGame4.setVisible(true);
+                
+        R1T9.setVisible(true);
+        R1T10.setVisible(true);
+        R1T11.setVisible(true);
+        R1T12.setVisible(true);
+        R1T13.setVisible(true);
+        R1T14.setVisible(true);
+        R1T15.setVisible(true);
+        R1T16.setVisible(true);
+                
+        R1T9.setText("");
+        R1T10.setText("");
+        R1T11.setText("");
+        R1T12.setText("");
+        R1T13.setText("");
+        R1T14.setText("");
+        R1T15.setText("");
+        R1T16.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1890,8 +2513,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SportsComboBox2;
     private javax.swing.JComboBox<String> SportsComboBox3;
     private javax.swing.JTextField T1EnterScore;
+    private javax.swing.JTextField T1ViewScore;
     private javax.swing.JTextField T2EnterScore;
-    private javax.swing.JTextField T2EnterScore1;
+    private javax.swing.JTextField T2ViewScore;
     private javax.swing.JTabbedPane TabbedPanel;
     private javax.swing.JTextField Team1Enter;
     private javax.swing.JLabel Team1Label;
@@ -1919,9 +2543,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField WinnerScoreEnter;
     private javax.swing.JLabel WinnerScoreLabel;
     private javax.swing.JLabel WinnerScoreLabel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField WinnerScoreView;
+    private javax.swing.JTextField WinnerView;
     private javax.swing.JLabel nameGame1;
     private javax.swing.JLabel nameGame2;
     private javax.swing.JLabel nameGame3;

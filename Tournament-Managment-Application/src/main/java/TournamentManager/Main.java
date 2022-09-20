@@ -26,7 +26,7 @@ public class Main {
     }
         
     public void clearHockeyTeams() throws IOException{
-        try(FileWriter fw = new FileWriter("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyTournament.csv", false); 
+        try(FileWriter fw = new FileWriter("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/Files/HockeyTournament.csv", false); 
             PrintWriter pw = new PrintWriter(fw, false)){ 
                 
                 pw.flush();
@@ -40,7 +40,7 @@ public class Main {
     }
     
     public void clearHockeyResults() throws IOException{
-        try(FileWriter fw = new FileWriter("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyResults.csv", false); 
+        try(FileWriter fw = new FileWriter("/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/Files/HockeyResults.ser", false); 
             PrintWriter pw = new PrintWriter(fw, false)){ 
                 
                 pw.flush();
@@ -55,7 +55,7 @@ public class Main {
     
     
     public void readHockeyTeams() throws IOException{
-        String filename = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/CSV files/HockeyTournament.csv";
+        String filename = "/Users/jaydenetheridge/Documents/GitHub/JaydenEDT2022/Tournament-Managment-Application/Files/HockeyTournament.csv";
         ArrayList<String> fileData = new ArrayList<String>();
         readHockeyFile(filename, fileData);
         

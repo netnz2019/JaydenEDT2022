@@ -72,7 +72,7 @@
                                       <Component id="SelectSport" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="313" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="334" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -103,7 +103,7 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="270" pref="596" max="32767" attributes="0"/>
+                                      <EmptySpace min="270" pref="617" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -564,98 +564,85 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="SelectRoundNumber" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="R1T17" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="R1T18" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="R1T23" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="R1T24" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="R1T20" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="R1T19" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="R1T21" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="R1T22" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="R1T20" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                          <Component id="R1T19" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                          <Component id="R1T17" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                          <Component id="R1T18" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="nameGame5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                                      <Component id="nameGame8" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nameGame6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                              <Component id="R1T23" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="R1T24" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+                                              <Component id="nameGame8" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="nameGame6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                                      <Component id="nameGame7" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nameGame5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="R1T21" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="R1T22" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+                                              <Component id="nameGame7" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                      <Component id="Team1Label" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="Team2Label" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="T2EnterScore1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="72" pref="157" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                              <Component id="GameNumber" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="SelectGameNumber" min="-2" pref="161" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="GameNumber" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="SelectGameNumber" min="-2" pref="138" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                      <Component id="Team2Label" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="T2ViewScore" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                                      <Component id="Team1Label" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="T1ViewScore" min="-2" pref="50" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="Team1Label2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jTextField1" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="WinnerScoreLabel1" max="32767" attributes="0"/>
-                                          <Component id="jTextField3" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="Team1Label2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="WinnerView" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="WinnerScoreLabel1" max="32767" attributes="0"/>
+                          <Component id="WinnerScoreView" pref="40" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="SportsComboBox1" min="-2" pref="151" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="258" max="-2" attributes="0"/>
@@ -664,6 +651,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>
                               <Component id="ViewResultsButtton" min="-2" pref="138" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
+                              <Component id="SportsComboBox1" min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -683,79 +674,74 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="SelectRoundNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="RoundNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="SelectGameNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="GameNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="nameGame5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nameGame8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="R1T23" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="R1T24" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="R1T17" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="nameGame5" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="R1T17" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="R1T18" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="nameGame7" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="R1T22" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="R1T21" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                      <Component id="nameGame6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="R1T18" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="nameGame6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nameGame7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="R1T22" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="R1T21" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="R1T19" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="R1T20" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="nameGame8" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="R1T23" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="T1ViewScore" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="Team1Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="T2ViewScore" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="Team2Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="R1T24" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="SelectGameNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="GameNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Team1Label2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="WinnerScoreLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Team1Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="Team1Label2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="WinnerScoreLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="T2EnterScore1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Team2Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="WinnerView" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="WinnerScoreView" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <EmptySpace pref="67" max="32767" attributes="0"/>
                       <Component id="ViewResultsButtton" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   </Group>
@@ -852,9 +838,15 @@
                 <Property name="text" type="java.lang.String" value="Team 2 - "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="T1ViewScore">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="T2EnterScore1">
+            <Component class="javax.swing.JTextField" name="T2ViewScore">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nameGame5">
               <Properties>
@@ -901,12 +893,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="nameGame7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Game 4"/>
+                <Property name="text" type="java.lang.String" value="Game 3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nameGame8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Game 3"/>
+                <Property name="text" type="java.lang.String" value="Game 4"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="R1T23">
@@ -922,14 +914,20 @@
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="WinnerView">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Team1Label2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Winner"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
+            <Component class="javax.swing.JTextField" name="WinnerScoreView">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="WinnerScoreLabel1">
               <Properties>
@@ -960,17 +958,6 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="R1T9" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="R1T10" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="R1T13" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="R1T14" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="R1T12" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                                   <Component id="R1T11" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
@@ -982,18 +969,26 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
+                              <Component id="nameGame2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                              <Component id="nameGame4" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="nameGame1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                                      <Component id="nameGame3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="nameGame2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                                      <Component id="nameGame4" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="R1T9" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="R1T10" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="R1T13" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="R1T14" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
+                              <Component id="nameGame1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                              <Component id="nameGame3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1001,66 +996,70 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="GameNumber1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SelectGameNumber1" min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="SelectGameNumber1" min="-2" pref="166" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="110" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="Team2Label1" pref="113" max="32767" attributes="0"/>
                                   <Component id="Team1Label1" max="32767" attributes="0"/>
+                                  <Component id="Team2Label1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="WinnerEnterLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="WinnerScoreLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="WinnerEnter" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="WinnerScoreEnter" min="-2" pref="40" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="T2EnterScore" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="T2EnterScore" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <Component id="T1EnterScore" min="-2" pref="50" max="-2" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="T1EnterScore" min="-2" pref="50" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="WinnerEnterLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="WinnerScoreLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="WinnerEnter" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="WinnerScoreEnter" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="294" max="-2" attributes="0"/>
-                      <Component id="SportsComboBox2" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
-                      <Component id="SelectSport2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ErrorPreventionResultsEnter" alignment="0" min="-2" pref="393" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="EnterResultsButton" min="-2" pref="177" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                               <Component id="ClearResultsFile" min="-2" pref="177" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="ErrorPreventionResultsEnter" min="-2" pref="500" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="294" max="-2" attributes="0"/>
+                              <Component id="SportsComboBox2" min="-2" pref="179" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="269" max="-2" attributes="0"/>
+                              <Component id="SelectSport2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1078,61 +1077,77 @@
                           <Component id="RoundNumber1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="GameNumber1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="nameGame1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nameGame3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="R1T9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="R1T10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="75" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="nameGame2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nameGame4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nameGame1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nameGame3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="R1T15" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="R1T16" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="R1T11" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="R1T12" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="R1T13" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="R1T14" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="T1EnterScore" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="R1T9" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="R1T10" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="R1T13" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="R1T14" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace pref="63" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="WinnerEnterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="WinnerScoreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nameGame2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nameGame4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="WinnerEnter" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="WinnerScoreEnter" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="R1T15" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="R1T16" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="R1T11" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="R1T12" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="T2EnterScore" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Team2Label1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="Team1Label1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="103" pref="103" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="T2EnterScore" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="Team2Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="Team1Label1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="T1EnterScore" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="WinnerEnterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="WinnerScoreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="WinnerEnter" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="WinnerScoreEnter" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -1371,7 +1386,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace pref="189" max="32767" attributes="0"/>
+                              <EmptySpace pref="210" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="Team1Enter" min="-2" pref="85" max="-2" attributes="0"/>
@@ -1414,7 +1429,7 @@
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="323" max="32767" attributes="0"/>
+                          <EmptySpace pref="344" max="32767" attributes="0"/>
                           <Component id="ErrorPreventionTeamSetup1" min="-2" pref="165" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
                       </Group>
