@@ -59,21 +59,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="301" max="-2" attributes="0"/>
-                                      <Component id="ViewTourButtton" min="-2" pref="138" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                      <Component id="FIrstRoundLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                      <Component id="SelectSport" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="334" max="32767" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -137,8 +122,8 @@
                                               </Group>
                                               <EmptySpace min="-2" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="ScoreFinalsT2" min="-2" pref="29" max="-2" attributes="0"/>
-                                                  <Component id="ScoreFinalsT1" min="-2" pref="29" max="-2" attributes="0"/>
+                                                  <Component id="ScoreFinalT2" min="-2" pref="29" max="-2" attributes="0"/>
+                                                  <Component id="ScoreFinalT1" min="-2" pref="29" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                               <Component id="TourWinner" min="-2" pref="115" max="-2" attributes="0"/>
@@ -149,10 +134,9 @@
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="SportsComboBox" min="-2" pref="138" max="-2" attributes="0"/>
-                                                  <Group type="102" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Component id="SemiT1" min="-2" pref="115" max="-2" attributes="0"/>
@@ -178,6 +162,11 @@
                                                       <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                                                       <Component id="FinalsLabel" min="-2" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="SelectSport" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="SportsComboBox" min="-2" pref="138" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="WinnerLabel" min="-2" max="-2" attributes="0"/>
@@ -187,13 +176,34 @@
                                   </Group>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="FIrstRoundLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="331" max="-2" attributes="0"/>
+                                      <Component id="TournamentTree" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
-                      <Component id="TournamentTree" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="ErrorPreventionViewTour" min="-2" pref="500" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="ViewTourButtton" min="-2" pref="138" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="304" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -204,11 +214,11 @@
                       <Component id="TournamentTree" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="SelectSport" min="-2" max="-2" attributes="0"/>
-                              <Component id="FIrstRoundLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="FIrstRoundLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="SportsComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="SelectSport" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="SportsComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -221,12 +231,12 @@
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
                                                   <Component id="FinalT1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="ScoreFinalsT1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="ScoreFinalT1" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
                                                   <Component id="FinalT2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="ScoreFinalsT2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="ScoreFinalT2" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                           </Group>
@@ -306,9 +316,11 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="ErrorPreventionViewTour" min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="ViewTourButtton" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -510,13 +522,13 @@
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="ScoreFinalsT1">
+            <Component class="javax.swing.JTextField" name="ScoreFinalT1">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="ScoreFinalsT2">
+            <Component class="javax.swing.JTextField" name="ScoreFinalT2">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="0"/>
@@ -540,6 +552,11 @@
             <Component class="javax.swing.JLabel" name="WinnerLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Winner"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ErrorPreventionViewTour">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -741,7 +758,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="67" max="32767" attributes="0"/>
+                      <EmptySpace pref="70" max="32767" attributes="0"/>
                       <Component id="ViewResultsButtton" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   </Group>
@@ -967,12 +984,6 @@
                                   <Component id="R1T15" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
-                              <Component id="nameGame2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                              <Component id="nameGame4" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="R1T9" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
@@ -984,11 +995,20 @@
                                   <Component id="R1T14" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
-                              <Component id="nameGame1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                              <Component id="nameGame3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="nameGame2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                      <Component id="nameGame4" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="nameGame1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                      <Component id="nameGame3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1005,15 +1025,10 @@
                                   <Component id="Team1Label1" max="32767" attributes="0"/>
                                   <Component id="Team2Label1" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="T2EnterScore" min="-2" pref="50" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="T1EnterScore" min="-2" pref="50" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="T2EnterScore" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="T1EnterScore" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -1099,7 +1114,7 @@
                                               <Component id="R1T14" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="63" max="32767" attributes="0"/>
+                                      <EmptySpace pref="64" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="nameGame2" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="nameGame4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1158,7 +1173,7 @@
                           <Component id="EnterResultsButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="ClearResultsFile" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1467,11 +1482,11 @@
                           <Component id="SetupTourButtton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="ClearTourButtton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="121" max="32767" attributes="0"/>
+                      <EmptySpace pref="124" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="336" max="32767" attributes="0"/>
+                          <EmptySpace pref="339" max="32767" attributes="0"/>
                           <Component id="ErrorPreventionTeamSetup1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                       </Group>
