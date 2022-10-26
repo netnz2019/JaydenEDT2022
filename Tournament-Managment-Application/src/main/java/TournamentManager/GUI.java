@@ -1,5 +1,6 @@
 package TournamentManager;
 
+import java.awt.Color;
 import java.io.*;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.List;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -1286,6 +1288,8 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         // TODO add your handling code here:
     }//GEN-LAST:event_SportsComboBox1ActionPerformed
 
+    
+//    Method for View Results button being pressed
     private void ViewResultsButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewResultsButttonActionPerformed
         String SportType = SportsComboBox1.getSelectedItem().toString();
         String RoundNum = SelectRoundNumber.getSelectedItem().toString();
@@ -1418,8 +1422,20 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         }
                         
                         case "1" -> {
-                            Team1Label.setText("Team 1 - " + Team1);
-                            Team2Label.setText("Team 2 - " + Team2);
+                            try {
+                                getResults("1");
+                                Team1Label.setText("Team 1 - " + winnerName);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                
+                            try {
+                                getResults("2");
+                                Team2Label.setText("Team 2 - " + winnerName);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
                             ErrorPreventionResultsEnter.setText("");
                             
                             try {
@@ -1437,8 +1453,20 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         }
                         
                         case "2" -> {
-                            Team1Label.setText("Team 1 - " + Team3);
-                            Team2Label.setText("Team 2 - " + Team4);
+                            try {
+                                getResults("3");
+                                Team1Label.setText("Team 1 - " + winnerName);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                
+                            try {
+                                getResults("4");
+                                Team2Label.setText("Team 2 - " + winnerName);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
                             ErrorPreventionResultsEnter.setText("");
                             
                             try {
@@ -1472,8 +1500,19 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         }
                         
                         case "1" -> {
-                            Team1Label.setText("Team 1 - " + Team1);
-                            Team2Label.setText("Team 2 - " + Team2);
+                            try {
+                                getResults("5");
+                                Team1Label.setText("Team 1 - " + winnerName);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                
+                            try {
+                                getResults("6");
+                                Team2Label.setText("Team 2 - " + winnerName);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                             ErrorPreventionResultsEnter.setText("");
                             
                             try {
@@ -1509,44 +1548,130 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }
     }//GEN-LAST:event_ViewResultsButttonActionPerformed
 
+    
+    
     private void SportsComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportsComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SportsComboBox3ActionPerformed
     
+    
+//    Method for Setup Tournament Button being pressed    
     private void SetupTourButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetupTourButttonActionPerformed
         TeamNames.clear();
         
-        TeamNames.add(Team1Enter.getText());
-        TeamNames.add(Team2Enter.getText());
-        TeamNames.add(Team3Enter.getText());
-        TeamNames.add(Team4Enter.getText());
-        TeamNames.add(Team5Enter.getText());
-        TeamNames.add(Team6Enter.getText());
-        TeamNames.add(Team7Enter.getText());
-        TeamNames.add(Team8Enter.getText()); 
+        ErrorPreventionTeamSetup.setText("");
         
-        String SportType = SportsComboBox3.getSelectedItem().toString();
+        int T1 = Team1Enter.getText().length();
+        int T2 = Team2Enter.getText().length();
+        int T3 = Team3Enter.getText().length();
+        int T4 = Team4Enter.getText().length();
+        int T5 = Team5Enter.getText().length();               
+        int T6 = Team6Enter.getText().length();                
+        int T7 = Team7Enter.getText().length();
+        int T8 = Team8Enter.getText().length();
         
-        if (SportType.equals("Select a Sport")){
-            ErrorPreventionTeamSetup.setText("Please select a sport.");
-        }
+        Team1Enter.setBorder(new LineBorder(Color.black,1));
+        Team2Enter.setBorder(new LineBorder(Color.black,1));
+        Team3Enter.setBorder(new LineBorder(Color.black,1));
+        Team4Enter.setBorder(new LineBorder(Color.black,1));
+        Team5Enter.setBorder(new LineBorder(Color.black,1));
+        Team6Enter.setBorder(new LineBorder(Color.black,1));
+        Team7Enter.setBorder(new LineBorder(Color.black,1));
+        Team8Enter.setBorder(new LineBorder(Color.black,1));
         
-        else if (SportType.equals("Hockey")){
-            try {
-                      
-            Main Main = new Main();
-            Main.clearHockeyTeams();
-            writeHockeyTeams(); 
             
-            ErrorPreventionTeamSetup.setText("Teams have been Entered");
-            } 
+        if (T1 < 10) {
+            TeamNames.add(Team1Enter.getText());
             
-            catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            if (T2 < 10) {
+                TeamNames.add(Team2Enter.getText());
+            
+                if (T3 < 10) {
+                    TeamNames.add(Team3Enter.getText());
+            
+                    if (T4 < 10) {
+                        TeamNames.add(Team4Enter.getText());
+            
+                        if (T5 < 10) {
+                            TeamNames.add(Team5Enter.getText());
+            
+                            if (T6 < 10) {
+                                TeamNames.add(Team6Enter.getText());
+            
+                                if (T7 < 10) {
+                                    TeamNames.add(Team7Enter.getText());
+            
+                                    if (T8 < 10) {
+                                        TeamNames.add(Team8Enter.getText());
+                                        
+                                        String SportType = SportsComboBox3.getSelectedItem().toString();
+        
+                                        if (SportType.equals("Select a Sport")){
+                                            ErrorPreventionTeamSetup.setText("Please select a sport.");
+                                        }
+        
+                                        else if (SportType.equals("Hockey")){
+                                            try {  
+                                                Main Main = new Main();
+                                                Main.clearHockeyTeams();
+                                                writeHockeyTeams(); 
+            
+                                                ErrorPreventionTeamSetup.setText("Teams have been Entered");
+                                            } 
+                                            
+                                            catch (IOException ex) {
+                                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
+                    
+                                    } else {
+                                        Team8Enter.setBorder(new LineBorder(Color.red,1));
+                                        ErrorPreventionTeamSetup.setText("Team name too Long");
+                                    }
+            
+                                } else {
+                                    Team7Enter.setBorder(new LineBorder(Color.red,1));
+                                    ErrorPreventionTeamSetup.setText("Team name too Long");
+                                }
+                
+                            } else {
+                                Team6Enter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionTeamSetup.setText("Team name too Long");
+                            }   
+            
+                        } else {
+                            Team5Enter.setBorder(new LineBorder(Color.red,1));
+                            ErrorPreventionTeamSetup.setText("Team name too Long");
+                        }
+            
+                    } else {
+                        Team4Enter.setBorder(new LineBorder(Color.red,1));
+                        ErrorPreventionTeamSetup.setText("Team name too Long");
+                    }
+                
+                } else {
+                    Team3Enter.setBorder(new LineBorder(Color.red,1));
+                    ErrorPreventionTeamSetup.setText("Team name too Long");
+                }
+            
+            } else {
+                Team2Enter.setBorder(new LineBorder(Color.red,1));
+                ErrorPreventionTeamSetup.setText("Team name too Long");
             }
-        }               
+
+        } else {
+            Team1Enter.setBorder(new LineBorder(Color.red,1));
+            ErrorPreventionTeamSetup.setText("Team name too Long");
+        }
+     
+        
+        
+        
+        
+                       
     }//GEN-LAST:event_SetupTourButttonActionPerformed
 
+//    Method for Select Round Number ComboBox being changed on View Tour Page
     private void SelectRoundNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRoundNumberActionPerformed
         String SportType = SportsComboBox1.getSelectedItem().toString();
         String RoundNum = SelectRoundNumber.getSelectedItem().toString();
@@ -1715,6 +1840,8 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }
     }//GEN-LAST:event_SelectRoundNumberActionPerformed
 
+    
+    
     private void SelectGameNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectGameNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SelectGameNumberActionPerformed
@@ -1723,6 +1850,8 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         // TODO add your handling code here:
     }//GEN-LAST:event_SportsComboBox2ActionPerformed
 
+    
+//    Method for Enter Results Button being pressed      
     private void EnterResultsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterResultsButtonActionPerformed
         String SportType = SportsComboBox2.getSelectedItem().toString();
         String RoundNum = SelectRoundNumber1.getSelectedItem().toString();
@@ -2005,6 +2134,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                     switch (GameNum) {
                         case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
                         case "1" ->                         {
+                            System.out.print("Jo Mama");
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -2059,6 +2189,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }    
     }//GEN-LAST:event_EnterResultsButtonActionPerformed
 
+//    Method for Select Round Number ComboBox being changed on Enter Results Page  
     private void SelectRoundNumber1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRoundNumber1ActionPerformed
         String SportType = SportsComboBox2.getSelectedItem().toString();
         String RoundNum = SelectRoundNumber1.getSelectedItem().toString();
@@ -2225,6 +2356,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }
     }//GEN-LAST:event_SelectRoundNumber1ActionPerformed
 
+//    Method for Select Game Number ComboBox being changed on Enter Results Page     
     private void SelectGameNumber1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectGameNumber1ActionPerformed
         String SportType = SportsComboBox2.getSelectedItem().toString();
         String RoundNum = SelectRoundNumber1.getSelectedItem().toString();
@@ -2377,6 +2509,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }
     }//GEN-LAST:event_SelectGameNumber1ActionPerformed
 
+//    Method for Clear Tournament Button being pressed 
     private void ClearTourButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearTourButttonActionPerformed
        String SportType = SportsComboBox3.getSelectedItem().toString();
         
@@ -2398,10 +2531,15 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         } 
     }//GEN-LAST:event_ClearTourButttonActionPerformed
 
+    
+    
     private void Team4EnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Team4EnterActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Team4EnterActionPerformed
 
+    
+    
+//    Method for View Tournament Button being pressed     
     private void ViewTourButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewTourButttonActionPerformed
         String SportType = SportsComboBox.getSelectedItem().toString();
             R1T1.setText("");
@@ -2423,29 +2561,28 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
             R1T6.setText("");
             R1T7.setText("");
             R1T8.setText("");
-            ScoreR1T1.setText("");
-            ScoreR1T2.setText("");
-            ScoreR1T3.setText("");
-            ScoreR1T4.setText("");
-            ScoreR1T5.setText("");
-            ScoreR1T6.setText("");
-            ScoreR1T7.setText("");
-            ScoreR1T8.setText("");
+            ScoreR1T1.setText("0");
+            ScoreR1T2.setText("0");
+            ScoreR1T3.setText("0");
+            ScoreR1T4.setText("0");
+            ScoreR1T5.setText("0");
+            ScoreR1T6.setText("0");
+            ScoreR1T7.setText("0");
+            ScoreR1T8.setText("0");
             
             SemiT1.setText("");
             SemiT2.setText("");
             SemiT3.setText("");
             SemiT4.setText("");
-            ScoreSemiT1.setText("");
-            ScoreSemiT2.setText("");
-            ScoreSemiT3.setText("");
-            ScoreSemiT4.setText("");
+            ScoreSemiT1.setText("0");
+            ScoreSemiT2.setText("0");
+            ScoreSemiT3.setText("0");
+            ScoreSemiT4.setText("0");
             
             FinalT1.setText("");
             FinalT2.setText("");
-
-            ScoreFinalT1.setText("");
-            ScoreFinalT2.setText("");
+            ScoreFinalT1.setText("0");
+            ScoreFinalT2.setText("0");
             
             TourWinner.setText("");
 
@@ -2516,7 +2653,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
             }
 
             try {
-                getResults("2");
+                getResults("5");
                                                             
                 ScoreSemiT1.setText(team1Score);
                 ScoreSemiT2.setText(team2Score);
@@ -2527,7 +2664,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
             }
 
             try {
-                getResults("3");
+                getResults("6");
                                                             
                 ScoreSemiT3.setText(team1Score);
                 ScoreSemiT4.setText(team2Score);
@@ -2538,7 +2675,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
             }
 
             try {
-                getResults("4");
+                getResults("7");
                                                             
                 ScoreFinalT1.setText(team1Score);
                 ScoreFinalT2.setText(team2Score);
@@ -2550,6 +2687,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }
     }//GEN-LAST:event_ViewTourButttonActionPerformed
 
+//    Method for Select Game Type ComboBox being changed on View Tournament Page 
     private void SportsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportsComboBoxActionPerformed
         String SportType = SportsComboBox.getSelectedItem().toString();
         
@@ -2563,92 +2701,82 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
             R1T7.setText("");
             R1T8.setText("");
             
-            ScoreR1T1.setText("");
-            ScoreR1T2.setText("");
-            ScoreR1T3.setText("");
-            ScoreR1T4.setText("");
-            ScoreR1T5.setText("");
-            ScoreR1T6.setText("");
-            ScoreR1T7.setText("");
-            ScoreR1T8.setText("");
+            ScoreR1T1.setText("0");
+            ScoreR1T2.setText("0");
+            ScoreR1T3.setText("0");
+            ScoreR1T4.setText("0");
+            ScoreR1T5.setText("0");
+            ScoreR1T6.setText("0");
+            ScoreR1T7.setText("0");
+            ScoreR1T8.setText("0");
             
             SemiT1.setText("");
             SemiT2.setText("");
             SemiT3.setText("");
             SemiT4.setText(""); 
             
-            ScoreSemiT1.setText("");
-            ScoreSemiT2.setText("");
-            ScoreSemiT3.setText("");
-            ScoreSemiT4.setText("");
+            ScoreSemiT1.setText("0");
+            ScoreSemiT2.setText("0");
+            ScoreSemiT3.setText("0");
+            ScoreSemiT4.setText("0");
             
             FinalT1.setText("");
-            FinalT2.setText("");
-            
-            ScoreFinalT1.setText("");
-            ScoreFinalT2.setText("");
+            FinalT2.setText("");            
+            ScoreFinalT1.setText("0");
+            ScoreFinalT2.setText("0");
             
             TourWinner.setText("");
             
         }
     }//GEN-LAST:event_SportsComboBoxActionPerformed
 
+    
+    
     private void R1T5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R1T5ActionPerformed
-
     private void R1T3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R1T3ActionPerformed
-
     private void SemiT4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SemiT4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SemiT4ActionPerformed
-
     private void Team1EnterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Team1EnterKeyTyped
         // TODO add your handling code here:        
     }//GEN-LAST:event_Team1EnterKeyTyped
-
     private void Team1EnterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Team1EnterMouseExited
         // TODO add your handling code here:        
     }//GEN-LAST:event_Team1EnterMouseExited
-
     private void Team1EnterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Team1EnterMouseReleased
         // TODO add your handling code here:        
     }//GEN-LAST:event_Team1EnterMouseReleased
-
     private void Team1EnterInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_Team1EnterInputMethodTextChanged
         // TODO add your handling code here:        
     }//GEN-LAST:event_Team1EnterInputMethodTextChanged
-
     private void Team1EnterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Team1EnterFocusLost
         // TODO add your handling code here:        
     }//GEN-LAST:event_Team1EnterFocusLost
-
     private void Team2EnterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Team2EnterFocusLost
         // TODO add your handling code here:            
     }//GEN-LAST:event_Team2EnterFocusLost
-
     private void R1T11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R1T11ActionPerformed
-
     private void R1T13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R1T13ActionPerformed
-
     private void R1T19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T19ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R1T19ActionPerformed
-
     private void R1T23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T23ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R1T23ActionPerformed
-
     private void T2EnterScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T2EnterScoreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_T2EnterScoreActionPerformed
 
+    
+//    Method for Clear Results File Button being pressed     
     private void ClearResultsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearResultsFileActionPerformed
         String SportType = SportsComboBox2.getSelectedItem().toString();
         
