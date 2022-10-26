@@ -1776,7 +1776,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             
                             for (int index = 0; index < GameResults.size(); index++){
                                 if (GameResults.get(index).getGameID().equals("1")){
-                                    System.out.println("JO");
                                     GameResults.set(index, game);
                                     writeHockeyResults();
                                     ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
