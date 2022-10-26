@@ -1,6 +1,5 @@
 package TournamentManager;
 
-import java.io.*;
 import static java.lang.String.valueOf;
 
 /**
