@@ -303,10 +303,20 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         R1T2.setEditable(false);
 
         R1T3.setEditable(false);
+        R1T3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T3ActionPerformed(evt);
+            }
+        });
 
         R1T4.setEditable(false);
 
         R1T5.setEditable(false);
+        R1T5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T5ActionPerformed(evt);
+            }
+        });
 
         R1T6.setEditable(false);
 
@@ -321,6 +331,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SemiT3.setEditable(false);
 
         SemiT4.setEditable(false);
+        SemiT4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SemiT4ActionPerformed(evt);
+            }
+        });
 
         FinalT1.setEditable(false);
 
@@ -589,6 +604,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SelectSport1.setText("Select Sport first then Round Number");
 
         SportsComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
+        SportsComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SportsComboBox1ActionPerformed(evt);
+            }
+        });
 
         ViewResultsButtton.setText("View Results");
         ViewResultsButtton.addActionListener(new java.awt.event.ActionListener() {
@@ -605,6 +625,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         });
 
         SelectGameNumber.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Game Number", "1", "2", "3", "4" }));
+        SelectGameNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectGameNumberActionPerformed(evt);
+            }
+        });
 
         RoundNumber.setText("Round Number");
 
@@ -625,6 +650,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         R1T18.setEditable(false);
 
         R1T19.setEditable(false);
+        R1T19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T19ActionPerformed(evt);
+            }
+        });
 
         R1T20.setEditable(false);
 
@@ -639,6 +669,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         nameGame8.setText("Game 4");
 
         R1T23.setEditable(false);
+        R1T23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T23ActionPerformed(evt);
+            }
+        });
 
         R1T24.setEditable(false);
 
@@ -746,7 +781,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             .addComponent(RoundNumber)
                             .addComponent(SelectGameNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(GameNumber))
-                        .addGap(18, 18, 18)
+                        .addGap(33, 33, 33)
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(ViewGameLayout.createSequentialGroup()
                                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -777,7 +812,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(ViewGameLayout.createSequentialGroup()
                                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(T1ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(T1ViewScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Team1Label))
                                         .addGap(67, 67, 67)
                                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -794,7 +829,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(WinnerView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(WinnerScoreView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(ViewResultsButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
@@ -804,6 +839,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SelectSport2.setText("Select Sport first then Round Number");
 
         SportsComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
+        SportsComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SportsComboBox2ActionPerformed(evt);
+            }
+        });
 
         EnterResultsButton.setText("Enter Round Results");
         EnterResultsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -834,6 +874,12 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
 
         Team2Label1.setText("Team 2 - ");
 
+        T2EnterScore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                T2EnterScoreActionPerformed(evt);
+            }
+        });
+
         ErrorPreventionResultsEnter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ErrorPreventionResultsEnter.setToolTipText("");
 
@@ -842,10 +888,20 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         R1T10.setEditable(false);
 
         R1T11.setEditable(false);
+        R1T11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T11ActionPerformed(evt);
+            }
+        });
 
         R1T12.setEditable(false);
 
         R1T13.setEditable(false);
+        R1T13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1T13ActionPerformed(evt);
+            }
+        });
 
         R1T14.setEditable(false);
 
@@ -1026,13 +1082,13 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)))
                 .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EnterResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClearResultsFile, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Enter Round Results", EnterResults);
@@ -1040,6 +1096,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SelectSport3.setText("Select Sports Tournament");
 
         SportsComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
+        SportsComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SportsComboBox3ActionPerformed(evt);
+            }
+        });
 
         TournamentTree3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         TournamentTree3.setText("Tournament Tree");
@@ -1060,15 +1121,50 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
 
         Team1Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team1Enter.setText("Team 1");
+        Team1Enter.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Team1EnterFocusLost(evt);
+            }
+        });
+        Team1Enter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Team1EnterMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                Team1EnterMouseReleased(evt);
+            }
+        });
+        Team1Enter.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                Team1EnterInputMethodTextChanged(evt);
+            }
+        });
+        Team1Enter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Team1EnterKeyTyped(evt);
+            }
+        });
 
         Team2Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team2Enter.setText("Team 2");
+        Team2Enter.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Team2EnterFocusLost(evt);
+            }
+        });
 
         Team3Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team3Enter.setText("Team 3");
 
         Team4Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team4Enter.setText("Team 4");
+        Team4Enter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Team4EnterActionPerformed(evt);
+            }
+        });
 
         Team5Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team5Enter.setText("Team 5");
@@ -1167,10 +1263,10 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                 .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SetupTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClearTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
             .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
-                    .addContainerGap(339, Short.MAX_VALUE)
+                    .addContainerGap(371, Short.MAX_VALUE)
                     .addComponent(ErrorPreventionTeamSetup1)
                     .addGap(152, 152, 152)))
         );
