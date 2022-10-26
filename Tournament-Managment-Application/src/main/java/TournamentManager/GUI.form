@@ -1165,7 +1165,11 @@
                                   <Component id="WinnerScoreEnter" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
                               <EmptySpace pref="144" max="32767" attributes="0"/>
+=======
+                              <EmptySpace max="32767" attributes="0"/>
+>>>>>>> parent of 820c598 (Finished Program 1.0)
 =======
                               <EmptySpace max="32767" attributes="0"/>
 >>>>>>> parent of 820c598 (Finished Program 1.0)
@@ -1178,7 +1182,11 @@
                           <Component id="ClearResultsFile" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <EmptySpace pref="77" max="32767" attributes="0"/>
+=======
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
+>>>>>>> parent of 820c598 (Finished Program 1.0)
 =======
                       <EmptySpace pref="59" max="32767" attributes="0"/>
 >>>>>>> parent of 820c598 (Finished Program 1.0)
