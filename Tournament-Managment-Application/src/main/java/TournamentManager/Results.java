@@ -1,12 +1,23 @@
+/*
+    General Sports Tournament Manager Program made by Jayden Etheridge
+    
+    This Results.java file is an object file for taking and checking each game 
+    results variables/content before being able to be added to an arraylist then serilizing and 
+    saving to HockeyResults.ser.
+    
+*/
+
 package TournamentManager;
 
-import java.io.*;
+// Importing Required API
 import static java.lang.String.valueOf;
 
-/**
+/*
  *
- * @author jaydenetheridge
+ * @author Jayden Etheridge - 2022 DGT Project
+ * 
  */
+
 public class Results implements java.io.Serializable {
     
     //  Creating Variables

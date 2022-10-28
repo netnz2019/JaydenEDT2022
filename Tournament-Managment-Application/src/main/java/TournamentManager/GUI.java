@@ -1,6 +1,18 @@
+/*
+    General Sports Tournament Manager Program made by Jayden Etheridge
+    
+    This GUI.java file contains the auto generated code and variables for the construction of the gui.
+    It also contains the methods and code for all the user interactable elements within the gui such as 
+    buttons, combo boxes and text fields and the outputs they send when the user interacts with 
+    the specified elements.
+    
+*/
+
 package TournamentManager;
 
+// Importing Required APIs
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.io.*;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -15,16 +27,18 @@ import java.util.stream.Collectors;
 import java.util.List;
 import javax.swing.border.LineBorder;
 
-/**
+/*
  *
- * @author jaydenetheridge
+ * @author Jayden Etheridge - 2022 DGT Project
+ * 
  */
+
 public class GUI extends javax.swing.JFrame implements java.io.Serializable {
     ArrayList<String> TeamNames = new ArrayList<>();
+    
     static List<Results> GameResults = new ArrayList<>();
     Results IntialResult = new Results("0", 0, 0, "Null", 0, "Null", 0, "Null", 0);
     
-
     Results game;
     
     String team1Name;
@@ -49,8 +63,8 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
     
     
     
-    /**
-     * Creates new form Main
+    /*
+       Creates new form GUI
      */
     public GUI() {        
         initComponents();
@@ -60,10 +74,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         
     }
     
-    public void setIntialResult(){
-        GameResults.add(IntialResult);
-    }
-    
+//    Method to write hockey tournament teams into CSV file 
     public void writeHockeyTeams() throws IOException{
         
         try(FileWriter fw = new FileWriter(HockeyTeamsFile, true); 
@@ -79,6 +90,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         } 
     }
     
+//    Method to serilize GameResults Arraylist
     public void writeHockeyResults(){
         try {
             try (FileOutputStream fileOut = new FileOutputStream(HockeyResultsFile); 
@@ -95,6 +107,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         
     }
     
+//    Method to load serilized/saved game results
     public void loadSavedGameResults() throws ClassNotFoundException{
         try{
             try (FileInputStream fileIn = new FileInputStream(HockeyResultsFile); 
@@ -107,8 +120,13 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         catch(IOException ioe){
         } 
     }
-
-    public boolean findResult(String gameid){
+    
+//    Method to search and identify if game Results exist
+    public boolean findResult(String gameid) throws ClassNotFoundException{
+        GameResults.clear();
+        GameResults.add(IntialResult);
+        loadSavedGameResults();
+        
         boolean search = false;
         for (int index = 0; index < GameResults.size(); index++){
             search = GameResults.get(index).getGameID().equals(gameid);
@@ -117,6 +135,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         return search;
     }
     
+//    Method to search & read game individual game results
     public void getResults(String gameid) throws ClassNotFoundException{
         team1Name = "";
         team1Score = "";
@@ -155,9 +174,9 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
 
         TabbedPanel = new javax.swing.JTabbedPane();
         ViewTour = new javax.swing.JPanel();
+        TournamentTree = new javax.swing.JLabel();
         SelectSport = new javax.swing.JLabel();
         SportsComboBox = new javax.swing.JComboBox<>();
-        TournamentTree = new javax.swing.JLabel();
         ViewTourButtton = new javax.swing.JButton();
         R1T1 = new javax.swing.JTextField();
         R1T2 = new javax.swing.JTextField();
@@ -188,7 +207,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         ScoreSemiT4 = new javax.swing.JTextField();
         ScoreFinalT1 = new javax.swing.JTextField();
         ScoreFinalT2 = new javax.swing.JTextField();
-        FIrstRoundLabel = new javax.swing.JLabel();
+        FirstRoundLabel = new javax.swing.JLabel();
         SemiFinalsLabel = new javax.swing.JLabel();
         FinalsLabel = new javax.swing.JLabel();
         WinnerLabel = new javax.swing.JLabel();
@@ -272,6 +291,9 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
 
         TabbedPanel.setForeground(new java.awt.Color(0, 0, 0));
 
+        TournamentTree.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        TournamentTree.setText("Tournament Tree");
+
         SelectSport.setText("Select Sports Tournament");
 
         SportsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
@@ -280,9 +302,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                 SportsComboBoxActionPerformed(evt);
             }
         });
-
-        TournamentTree.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        TournamentTree.setText("Tournament Tree");
 
         ViewTourButtton.setText("View Tournament");
         ViewTourButtton.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +397,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         ScoreFinalT2.setEditable(false);
         ScoreFinalT2.setText("0");
 
-        FIrstRoundLabel.setText("First Round");
+        FirstRoundLabel.setText("First Round");
 
         SemiFinalsLabel.setText("Semi-Finals");
 
@@ -485,7 +504,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ViewTourLayout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addComponent(FIrstRoundLabel))
+                                .addComponent(FirstRoundLabel))
                             .addGroup(ViewTourLayout.createSequentialGroup()
                                 .addGap(331, 331, 331)
                                 .addComponent(TournamentTree)))
@@ -508,7 +527,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                 .addComponent(TournamentTree)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FIrstRoundLabel)
+                    .addComponent(FirstRoundLabel)
                     .addGroup(ViewTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(SportsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(SelectSport)))
@@ -745,7 +764,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(WinnerScoreLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(WinnerScoreView, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
+                .addGap(36, 36, 36))
             .addGroup(ViewGameLayout.createSequentialGroup()
                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ViewGameLayout.createSequentialGroup()
@@ -774,7 +793,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             .addComponent(RoundNumber)
                             .addComponent(SelectGameNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(GameNumber))
-                        .addGap(33, 33, 33)
+                        .addGap(18, 18, 18)
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(ViewGameLayout.createSequentialGroup()
                                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -805,9 +824,9 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(ViewGameLayout.createSequentialGroup()
                                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(T1ViewScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(T1ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Team1Label))
-                                        .addGap(80, 80, 80)
+                                        .addGap(67, 67, 67)
                                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(T2ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Team2Label))
@@ -822,7 +841,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(WinnerView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(WinnerScoreView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(ViewResultsButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
@@ -941,11 +960,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             .addComponent(R1T16, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(R1T15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(EnterResultsLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(nameGame2)
-                        .addGap(118, 118, 118)
-                        .addComponent(nameGame4))
-                    .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(R1T9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(R1T10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -955,9 +969,15 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(nameGame1)
-                        .addGap(118, 118, 118)
-                        .addComponent(nameGame3)))
+                        .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(nameGame2)
+                                .addGap(118, 118, 118)
+                                .addComponent(nameGame4))
+                            .addGroup(EnterResultsLayout.createSequentialGroup()
+                                .addComponent(nameGame1)
+                                .addGap(118, 118, 118)
+                                .addComponent(nameGame3)))))
                 .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -970,13 +990,10 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Team1Label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Team2Label1))
+                        .addGap(18, 18, 18)
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EnterResultsLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(EnterResultsLayout.createSequentialGroup()
@@ -1041,7 +1058,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                                         .addComponent(R1T13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(R1T14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(nameGame2)
                                     .addComponent(nameGame4))
@@ -1077,29 +1094,13 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(WinnerEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(WinnerScoreEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)))
-=======
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
->>>>>>> parent of 820c598 (Finished Program 1.0)
-=======
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
->>>>>>> parent of 820c598 (Finished Program 1.0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)))
                 .addComponent(ErrorPreventionResultsEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EnterResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClearResultsFile, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
-<<<<<<< HEAD
-                .addContainerGap(77, Short.MAX_VALUE))
-=======
-                .addContainerGap(59, Short.MAX_VALUE))
->>>>>>> parent of 820c598 (Finished Program 1.0)
-=======
-                .addContainerGap(59, Short.MAX_VALUE))
->>>>>>> parent of 820c598 (Finished Program 1.0)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Enter Round Results", EnterResults);
@@ -1274,10 +1275,10 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                 .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SetupTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClearTourButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
             .addGroup(SetupTourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetupTourLayout.createSequentialGroup()
-                    .addContainerGap(371, Short.MAX_VALUE)
+                    .addContainerGap(339, Short.MAX_VALUE)
                     .addComponent(ErrorPreventionTeamSetup1)
                     .addGap(152, 152, 152)))
         );
@@ -1299,10 +1300,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void SportsComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportsComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SportsComboBox1ActionPerformed
 
     
 //    Method for View Results button being pressed
@@ -1564,13 +1561,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }
     }//GEN-LAST:event_ViewResultsButttonActionPerformed
 
-    
-    
-    private void SportsComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportsComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SportsComboBox3ActionPerformed
-    
-    
 //    Method for Setup Tournament Button being pressed    
     private void SetupTourButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetupTourButttonActionPerformed
         TeamNames.clear();
@@ -1856,22 +1846,13 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         }
     }//GEN-LAST:event_SelectRoundNumberActionPerformed
 
-    
-    
-    private void SelectGameNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectGameNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SelectGameNumberActionPerformed
-
-    private void SportsComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportsComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SportsComboBox2ActionPerformed
-
-    
 //    Method for Enter Results Button being pressed      
     private void EnterResultsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterResultsButtonActionPerformed
         String SportType = SportsComboBox2.getSelectedItem().toString();
         String RoundNum = SelectRoundNumber1.getSelectedItem().toString();
         String GameNum = SelectGameNumber1.getSelectedItem().toString();
+        
+        
         
         if (SportType.equals("Select a Sport")){
             ErrorPreventionResultsEnter.setText("Please select a sport.");
@@ -1884,6 +1865,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                 switch (GameNum) {
                     case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
                     case "1" ->                         {
+                        try {
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -1895,6 +1877,8 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
                             
+                        
+
                             try {
                                 loadSavedGameResults();
                             } catch (ClassNotFoundException ex) {
@@ -1923,8 +1907,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
-                            ErrorPreventionResultsEnter.setText("");
+                            
+                        }catch (NumberFormatException e) {
+                            ErrorPreventionResultsEnter.setText("Positive numbers only ");
                         }
+                    }
                     
                     case "2" ->                         {
                             String Team1Score = T1EnterScore.getText();
@@ -2101,7 +2088,7 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
-                            ErrorPreventionResultsEnter.setText("");
+                            
                         }
                         
                         case "2" ->                         {
@@ -2145,12 +2132,13 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
                         }
+                    }
+                }
                         
                 case "Finals" -> {
-                    switch (GameNum) {
+                    switch (GameNum) {                        
                         case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
                         case "1" ->                         {
-                            System.out.print("Jo Mama");
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -2190,17 +2178,10 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
-                            ErrorPreventionResultsEnter.setText("");
+                           
                         }
-                        
-                        default -> {
-                                }
                     }
-                }
-                default -> {
-                }
-            }
-                }
+                }     
             }
         }    
     }//GEN-LAST:event_EnterResultsButtonActionPerformed
@@ -2547,14 +2528,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         } 
     }//GEN-LAST:event_ClearTourButttonActionPerformed
 
-    
-    
-    private void Team4EnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Team4EnterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Team4EnterActionPerformed
-
-    
-    
 //    Method for View Tournament Button being pressed     
     private void ViewTourButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewTourButttonActionPerformed
         String SportType = SportsComboBox.getSelectedItem().toString();
@@ -2745,52 +2718,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
             
         }
     }//GEN-LAST:event_SportsComboBoxActionPerformed
-
-    
-    
-    private void R1T5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_R1T5ActionPerformed
-    private void R1T3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_R1T3ActionPerformed
-    private void SemiT4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SemiT4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SemiT4ActionPerformed
-    private void Team1EnterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Team1EnterKeyTyped
-        // TODO add your handling code here:        
-    }//GEN-LAST:event_Team1EnterKeyTyped
-    private void Team1EnterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Team1EnterMouseExited
-        // TODO add your handling code here:        
-    }//GEN-LAST:event_Team1EnterMouseExited
-    private void Team1EnterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Team1EnterMouseReleased
-        // TODO add your handling code here:        
-    }//GEN-LAST:event_Team1EnterMouseReleased
-    private void Team1EnterInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_Team1EnterInputMethodTextChanged
-        // TODO add your handling code here:        
-    }//GEN-LAST:event_Team1EnterInputMethodTextChanged
-    private void Team1EnterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Team1EnterFocusLost
-        // TODO add your handling code here:        
-    }//GEN-LAST:event_Team1EnterFocusLost
-    private void Team2EnterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Team2EnterFocusLost
-        // TODO add your handling code here:            
-    }//GEN-LAST:event_Team2EnterFocusLost
-    private void R1T11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_R1T11ActionPerformed
-    private void R1T13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_R1T13ActionPerformed
-    private void R1T19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_R1T19ActionPerformed
-    private void R1T23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1T23ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_R1T23ActionPerformed
-    private void T2EnterScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T2EnterScoreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_T2EnterScoreActionPerformed
-
     
 //    Method for Clear Results File Button being pressed     
     private void ClearResultsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearResultsFileActionPerformed
@@ -2861,10 +2788,10 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
     private javax.swing.JLabel ErrorPreventionTeamSetup;
     private javax.swing.JLabel ErrorPreventionTeamSetup1;
     private javax.swing.JLabel ErrorPreventionViewTour;
-    private javax.swing.JLabel FIrstRoundLabel;
     private javax.swing.JTextField FinalT1;
     private javax.swing.JTextField FinalT2;
     private javax.swing.JLabel FinalsLabel;
+    private javax.swing.JLabel FirstRoundLabel;
     private javax.swing.JLabel GameNumber;
     private javax.swing.JLabel GameNumber1;
     private javax.swing.JTextField R1T1;
