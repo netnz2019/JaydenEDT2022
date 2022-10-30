@@ -12,7 +12,6 @@ package TournamentManager;
 
 // Importing Required APIs
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.io.*;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -315,20 +314,10 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         R1T2.setEditable(false);
 
         R1T3.setEditable(false);
-        R1T3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T3ActionPerformed(evt);
-            }
-        });
 
         R1T4.setEditable(false);
 
         R1T5.setEditable(false);
-        R1T5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T5ActionPerformed(evt);
-            }
-        });
 
         R1T6.setEditable(false);
 
@@ -343,11 +332,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SemiT3.setEditable(false);
 
         SemiT4.setEditable(false);
-        SemiT4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SemiT4ActionPerformed(evt);
-            }
-        });
 
         FinalT1.setEditable(false);
 
@@ -616,11 +600,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SelectSport1.setText("Select Sport first then Round Number");
 
         SportsComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
-        SportsComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SportsComboBox1ActionPerformed(evt);
-            }
-        });
 
         ViewResultsButtton.setText("View Results");
         ViewResultsButtton.addActionListener(new java.awt.event.ActionListener() {
@@ -637,11 +616,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         });
 
         SelectGameNumber.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Game Number", "1", "2", "3", "4" }));
-        SelectGameNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelectGameNumberActionPerformed(evt);
-            }
-        });
 
         RoundNumber.setText("Round Number");
 
@@ -662,11 +636,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         R1T18.setEditable(false);
 
         R1T19.setEditable(false);
-        R1T19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T19ActionPerformed(evt);
-            }
-        });
 
         R1T20.setEditable(false);
 
@@ -681,11 +650,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         nameGame8.setText("Game 4");
 
         R1T23.setEditable(false);
-        R1T23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T23ActionPerformed(evt);
-            }
-        });
 
         R1T24.setEditable(false);
 
@@ -702,65 +666,67 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         ViewGameLayout.setHorizontalGroup(
             ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ViewGameLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ViewGameLayout.createSequentialGroup()
-                        .addComponent(RoundNumber)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelectRoundNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(R1T20, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(R1T19, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(R1T17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(R1T18, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ViewGameLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameGame6)
                             .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addGap(130, 130, 130)
+                                .addComponent(RoundNumber)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SelectRoundNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(R1T20, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T19, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(R1T18, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ViewGameLayout.createSequentialGroup()
+                                .addGap(34, 34, 34)
                                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(R1T23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(R1T24, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(nameGame6)
                                     .addGroup(ViewGameLayout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(nameGame8))))
+                                        .addGap(130, 130, 130)
+                                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(R1T23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(R1T24, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(ViewGameLayout.createSequentialGroup()
+                                                .addGap(33, 33, 33)
+                                                .addComponent(nameGame8))))
+                                    .addGroup(ViewGameLayout.createSequentialGroup()
+                                        .addComponent(nameGame5)
+                                        .addGap(84, 84, 84)
+                                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(R1T21, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(R1T22, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(ViewGameLayout.createSequentialGroup()
+                                                .addGap(33, 33, 33)
+                                                .addComponent(nameGame7)))))))
+                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addComponent(nameGame5)
-                                .addGap(84, 84, 84)
+                                .addGap(108, 108, 108)
+                                .addComponent(GameNumber)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SelectGameNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(R1T21, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(R1T22, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
+                                        .addComponent(Team2Label)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(T2ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(ViewGameLayout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(nameGame7)))))))
-                .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ViewGameLayout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(GameNumber)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelectGameNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
-                                .addComponent(Team2Label)
-                                .addGap(18, 18, 18)
-                                .addComponent(T2ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ViewGameLayout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(Team1Label)
-                                .addGap(18, 18, 18)
-                                .addComponent(T1ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(Team1Label)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(T1ViewScore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(35, 35, 35)
                                 .addComponent(Team1Label2)
-                                .addGap(23, 23, 23))
-                            .addComponent(WinnerView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(29, 29, 29))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewGameLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WinnerView, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(ViewGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(WinnerScoreLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(WinnerScoreView, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE))
@@ -851,11 +817,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SelectSport2.setText("Select Sport first then Round Number");
 
         SportsComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
-        SportsComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SportsComboBox2ActionPerformed(evt);
-            }
-        });
 
         EnterResultsButton.setText("Enter Round Results");
         EnterResultsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -886,12 +847,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
 
         Team2Label1.setText("Team 2 - ");
 
-        T2EnterScore.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                T2EnterScoreActionPerformed(evt);
-            }
-        });
-
         ErrorPreventionResultsEnter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ErrorPreventionResultsEnter.setToolTipText("");
 
@@ -900,20 +855,10 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         R1T10.setEditable(false);
 
         R1T11.setEditable(false);
-        R1T11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T11ActionPerformed(evt);
-            }
-        });
 
         R1T12.setEditable(false);
 
         R1T13.setEditable(false);
-        R1T13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1T13ActionPerformed(evt);
-            }
-        });
 
         R1T14.setEditable(false);
 
@@ -1079,11 +1024,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                                     .addGroup(EnterResultsLayout.createSequentialGroup()
                                         .addGap(103, 103, 103)
                                         .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(T2EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Team2Label1)))
                                     .addGroup(EnterResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(Team1Label1)
-                                        .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(T1EnterScore, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(EnterResultsLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
@@ -1108,11 +1053,6 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         SelectSport3.setText("Select Sports Tournament");
 
         SportsComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Sport", "Hockey", "Football", "Rugby", "Netball" }));
-        SportsComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SportsComboBox3ActionPerformed(evt);
-            }
-        });
 
         TournamentTree3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         TournamentTree3.setText("Tournament Tree");
@@ -1133,50 +1073,15 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
 
         Team1Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team1Enter.setText("Team 1");
-        Team1Enter.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                Team1EnterFocusLost(evt);
-            }
-        });
-        Team1Enter.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                Team1EnterMouseExited(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                Team1EnterMouseReleased(evt);
-            }
-        });
-        Team1Enter.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                Team1EnterInputMethodTextChanged(evt);
-            }
-        });
-        Team1Enter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Team1EnterKeyTyped(evt);
-            }
-        });
 
         Team2Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team2Enter.setText("Team 2");
-        Team2Enter.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                Team2EnterFocusLost(evt);
-            }
-        });
 
         Team3Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team3Enter.setText("Team 3");
 
         Team4Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team4Enter.setText("Team 4");
-        Team4Enter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Team4EnterActionPerformed(evt);
-            }
-        });
 
         Team5Enter.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Team5Enter.setText("Team 5");
@@ -1866,6 +1771,11 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                     case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
                     case "1" ->                         {
                         try {
+                            T1EnterScore.setBorder(new LineBorder(Color.black,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.black,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+                            WinnerEnter.setBorder(new LineBorder(Color.black,1));
+                            
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -1877,6 +1787,29 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
                             
+                            if (Score1 < 0){
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (Score2 < 0){
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (winnerScoreEnter < 0){
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only"); 
+                                break; 
+                            }
+                            
+                            if (WinnerName.length() > 10){
+                                WinnerEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Winner Name cannot be more than 10 Characters");
+                                break; 
+                            }
                         
 
                             try {
@@ -1909,11 +1842,20 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             WinnerScoreEnter.setText("");
                             
                         }catch (NumberFormatException e) {
-                            ErrorPreventionResultsEnter.setText("Positive numbers only ");
+                            T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                            ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
                         }
                     }
                     
                     case "2" ->                         {
+                            try {
+                            T1EnterScore.setBorder(new LineBorder(Color.black,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.black,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+                            WinnerEnter.setBorder(new LineBorder(Color.black,1));
+                            
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -1925,21 +1867,44 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
                             
+                            if (Score1 < 0){
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
                             
+                            if (Score2 < 0){
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
                             
-                            game = new Results("2", 1, 2, Team3, Score1, Team4, Score2, WinnerName, winnerScoreEnter);
+                            if (winnerScoreEnter < 0){
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only"); 
+                                break; 
+                            }
                             
+                            if (WinnerName.length() > 10){
+                                WinnerEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Winner Name cannot be more than 10 Characters");
+                                break; 
+                            }
+                        
+
                             try {
                                 loadSavedGameResults();
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                            }   
+                            }                                                                  
+                            
+                            game = new Results("2", 1, 2, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
                             
                             for (int index = 0; index < GameResults.size(); index++){
                                 if (GameResults.get(index).getGameID().equals("2")){
-                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     GameResults.set(index, game);
                                     writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     break;
                                 }
                                 
@@ -1955,9 +1920,22 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
+                            
+                        }catch (NumberFormatException e) {
+                            T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                            ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
                         }
+                    }
                     
                     case "3" ->                         {
+                            try {
+                            T1EnterScore.setBorder(new LineBorder(Color.black,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.black,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+                            WinnerEnter.setBorder(new LineBorder(Color.black,1));
+                            
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -1969,19 +1947,44 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
                             
-                            game = new Results("3", 1, 3, Team5, Score1, Team6, Score2, WinnerName, winnerScoreEnter);
+                            if (Score1 < 0){
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
                             
+                            if (Score2 < 0){
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (winnerScoreEnter < 0){
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only"); 
+                                break; 
+                            }
+                            
+                            if (WinnerName.length() > 10){
+                                WinnerEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Winner Name cannot be more than 10 Characters");
+                                break; 
+                            }
+                        
+
                             try {
                                 loadSavedGameResults();
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                            }   
+                            }                                                                  
+                            
+                            game = new Results("3", 1, 3, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
                             
                             for (int index = 0; index < GameResults.size(); index++){
                                 if (GameResults.get(index).getGameID().equals("3")){
-                                    ErrorPreventionResultsEnter.setText("Your about to replace an already Existing result would you like to continue?");
                                     GameResults.set(index, game);
                                     writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     break;
                                 }
                                 
@@ -1997,9 +2000,22 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
+                            
+                        }catch (NumberFormatException e) {
+                            T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                            ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
                         }
+                    }
                     
                     case "4" ->                         {
+                            try {
+                            T1EnterScore.setBorder(new LineBorder(Color.black,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.black,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+                            WinnerEnter.setBorder(new LineBorder(Color.black,1));
+                            
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -2011,19 +2027,44 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
                             
-                            game = new Results("4", 1, 4, Team7, Score1, Team8, Score2, WinnerName, winnerScoreEnter);
+                            if (Score1 < 0){
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
                             
+                            if (Score2 < 0){
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (winnerScoreEnter < 0){
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only"); 
+                                break; 
+                            }
+                            
+                            if (WinnerName.length() > 10){
+                                WinnerEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Winner Name cannot be more than 10 Characters");
+                                break; 
+                            }
+                        
+
                             try {
                                 loadSavedGameResults();
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                            }   
+                            }                                                                  
+                            
+                            game = new Results("4", 1, 4, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
                             
                             for (int index = 0; index < GameResults.size(); index++){
                                 if (GameResults.get(index).getGameID().equals("4")){
-                                    ErrorPreventionResultsEnter.setText("Your about to replace an already Existing result would you like to continue?");
                                     GameResults.set(index, game);
                                     writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     break;
                                 }
                                 
@@ -2039,16 +2080,28 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
-                        }
-                    default -> {
+                            
+                            }catch (NumberFormatException e) {
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                            }
                     }
+                
                 }
-                }
+            }
                 
                 case "Semi Finals" -> {
                     switch (GameNum) {                        
                         case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
                         case "1" ->                         {
+                            try {
+                            T1EnterScore.setBorder(new LineBorder(Color.black,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.black,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+                            WinnerEnter.setBorder(new LineBorder(Color.black,1));
+                            
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -2059,20 +2112,45 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
+                            
+                            if (Score1 < 0){
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (Score2 < 0){
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (winnerScoreEnter < 0){
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only"); 
+                                break; 
+                            }
+                            
+                            if (WinnerName.length() > 10){
+                                WinnerEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Winner Name cannot be more than 10 Characters");
+                                break; 
+                            }
+                        
+
+                            try {
+                                loadSavedGameResults();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }                                                                  
                             
                             game = new Results("5", 2, 1, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
                             
-                            try {
-                                loadSavedGameResults();
-                            } catch (ClassNotFoundException ex) {
-                                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                            }       
-
                             for (int index = 0; index < GameResults.size(); index++){
                                 if (GameResults.get(index).getGameID().equals("5")){
-                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     GameResults.set(index, game);
                                     writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     break;
                                 }
                                 
@@ -2082,16 +2160,28 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                                     ErrorPreventionResultsEnter.setText("Game Results Entered.");
                                     break;
                                 }
-                            }       
+                            }   
                             
                             T1EnterScore.setText("");
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
                             
+                            }catch (NumberFormatException e) {
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                            }
                         }
                         
                         case "2" ->                         {
+                            try {
+                            T1EnterScore.setBorder(new LineBorder(Color.black,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.black,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+                            WinnerEnter.setBorder(new LineBorder(Color.black,1));
+                            
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -2103,19 +2193,44 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
                             
-                            game = new Results("6", 2, 2, Team3, Score1, Team4, Score2, WinnerName, winnerScoreEnter);
+                            if (Score1 < 0){
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
                             
+                            if (Score2 < 0){
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (winnerScoreEnter < 0){
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only"); 
+                                break; 
+                            }
+                            
+                            if (WinnerName.length() > 10){
+                                WinnerEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Winner Name cannot be more than 10 Characters");
+                                break; 
+                            }
+                        
+
                             try {
                                 loadSavedGameResults();
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                            }       
+                            }                                                                  
+                            
+                            game = new Results("6", 2, 2, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
                             
                             for (int index = 0; index < GameResults.size(); index++){
                                 if (GameResults.get(index).getGameID().equals("6")){
-                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     GameResults.set(index, game);
                                     writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     break;
                                 }
                                 
@@ -2125,12 +2240,19 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                                     ErrorPreventionResultsEnter.setText("Game Results Entered.");
                                     break;
                                 }
-                            }      
+                            }   
                             
                             T1EnterScore.setText("");
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
+                            
+                        }catch (NumberFormatException e) {
+                            T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                            ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                        }
                         }
                     }
                 }
@@ -2139,6 +2261,12 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                     switch (GameNum) {                        
                         case "Select Game Number" -> ErrorPreventionResultsEnter.setText("Please select a Game Number.");
                         case "1" ->                         {
+                            try {
+                            T1EnterScore.setBorder(new LineBorder(Color.black,1));
+                            T2EnterScore.setBorder(new LineBorder(Color.black,1));
+                            WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+                            WinnerEnter.setBorder(new LineBorder(Color.black,1));
+                            
                             String Team1Score = T1EnterScore.getText();
                             int Score1 = Integer.parseInt(Team1Score);
                             
@@ -2150,19 +2278,44 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                             String WinnerScore = WinnerScoreEnter.getText();
                             int winnerScoreEnter = Integer.parseInt(WinnerScore);
                             
-                            game = new Results("7", 3, 1, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
+                            if (Score1 < 0){
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
                             
+                            if (Score2 < 0){
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                                break; 
+                            }
+                            
+                            if (winnerScoreEnter < 0){
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only"); 
+                                break; 
+                            }
+                            
+                            if (WinnerName.length() > 10){
+                                WinnerEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Winner Name cannot be more than 10 Characters");
+                                break; 
+                            }
+                        
+
                             try {
                                 loadSavedGameResults();
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                            }       
-
+                            }                                                                  
+                            
+                            game = new Results("7", 3, 1, Team1, Score1, Team2, Score2, WinnerName, winnerScoreEnter);
+                            
                             for (int index = 0; index < GameResults.size(); index++){
                                 if (GameResults.get(index).getGameID().equals("7")){
-                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     GameResults.set(index, game);
                                     writeHockeyResults();
+                                    ErrorPreventionResultsEnter.setText("Your about to replace an already existing result would you like to continue?");
                                     break;
                                 }
                                 
@@ -2172,12 +2325,19 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
                                     ErrorPreventionResultsEnter.setText("Game Results Entered.");
                                     break;
                                 }
-                            }       
+                            }   
                             
                             T1EnterScore.setText("");
                             T2EnterScore.setText("");
                             WinnerEnter.setText("");
                             WinnerScoreEnter.setText("");
+                            
+                            }catch (NumberFormatException e) {
+                                T1EnterScore.setBorder(new LineBorder(Color.red,1));
+                                T2EnterScore.setBorder(new LineBorder(Color.red,1));
+                                WinnerScoreEnter.setBorder(new LineBorder(Color.red,1));
+                                ErrorPreventionResultsEnter.setText("Positive numbers for scores only");
+                            }
                            
                         }
                     }
@@ -2777,6 +2937,20 @@ public class GUI extends javax.swing.JFrame implements java.io.Serializable {
         R1T14.setText("");
         R1T15.setText("");
         R1T16.setText("");
+        
+        T1EnterScore.setBorder(new LineBorder(Color.black,1));
+        T2EnterScore.setBorder(new LineBorder(Color.black,1));
+        WinnerScoreEnter.setBorder(new LineBorder(Color.black,1));
+        WinnerEnter.setBorder(new LineBorder(Color.black,1));
+        
+        Team1Enter.setBorder(new LineBorder(Color.black,1));
+        Team2Enter.setBorder(new LineBorder(Color.black,1));
+        Team3Enter.setBorder(new LineBorder(Color.black,1));
+        Team4Enter.setBorder(new LineBorder(Color.black,1));
+        Team5Enter.setBorder(new LineBorder(Color.black,1));
+        Team6Enter.setBorder(new LineBorder(Color.black,1));
+        Team7Enter.setBorder(new LineBorder(Color.black,1));
+        Team8Enter.setBorder(new LineBorder(Color.black,1));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

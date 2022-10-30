@@ -380,9 +380,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="R1T3ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="R1T4">
               <Properties>
@@ -393,9 +390,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="R1T5ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="R1T6">
               <Properties>
@@ -431,9 +425,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SemiT4ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="FinalT1">
               <Properties>
@@ -574,85 +565,88 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="RoundNumber" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SelectRoundNumber" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="R1T20" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="R1T19" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="R1T17" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="R1T18" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nameGame6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                              <Component id="R1T23" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
-                                              <Component id="R1T24" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
-                                              <Component id="nameGame8" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="nameGame5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                      <Component id="RoundNumber" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="SelectRoundNumber" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="R1T20" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="R1T19" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="R1T17" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="R1T18" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="R1T21" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
-                                              <Component id="R1T22" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                          <Component id="nameGame6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                                      <Component id="R1T23" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                                      <Component id="R1T24" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+                                                      <Component id="nameGame8" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
-                                              <Component id="nameGame7" min="-2" max="-2" attributes="0"/>
+                                              <Component id="nameGame5" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="R1T21" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                                      <Component id="R1T22" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+                                                      <Component id="nameGame7" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                              <Component id="GameNumber" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SelectGameNumber" min="-2" pref="161" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                                      <Component id="GameNumber" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="SelectGameNumber" min="-2" pref="161" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="Team2Label" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="T2ViewScore" min="-2" pref="50" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                                              <Component id="Team1Label" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="T1ViewScore" min="-2" pref="50" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="Team1Label2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="Team2Label" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="T2ViewScore" min="-2" pref="50" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                      <Component id="Team1Label" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="T1ViewScore" min="-2" pref="50" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="Team1Label2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="WinnerView" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="WinnerView" min="-2" pref="80" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="WinnerScoreLabel1" max="32767" attributes="0"/>
                           <Component id="WinnerScoreView" pref="40" max="32767" attributes="0"/>
@@ -783,9 +777,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SportsComboBox1ActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -828,9 +819,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SelectGameNumberActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -884,9 +872,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="R1T19ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="R1T20">
               <Properties>
@@ -922,9 +907,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="R1T23ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="R1T24">
               <Properties>
@@ -1140,13 +1122,13 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="103" pref="103" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="T2EnterScore" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="T2EnterScore" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                                   <Component id="Team2Label1" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                               <Component id="Team1Label1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="T1EnterScore" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="T1EnterScore" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
@@ -1196,9 +1178,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SportsComboBox2ActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -1271,9 +1250,6 @@
             <Component class="javax.swing.JTextField" name="T1EnterScore">
             </Component>
             <Component class="javax.swing.JTextField" name="T2EnterScore">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="T2EnterScoreActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="ErrorPreventionResultsEnter">
               <Properties>
@@ -1295,9 +1271,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="R1T11ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="R1T12">
               <Properties>
@@ -1308,9 +1281,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="R1T13ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="R1T14">
               <Properties>
@@ -1512,9 +1482,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SportsComboBox3ActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -1548,22 +1515,12 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Team 1"/>
               </Properties>
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Team1EnterFocusLost"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Team1EnterMouseExited"/>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Team1EnterMouseReleased"/>
-                <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="Team1EnterInputMethodTextChanged"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Team1EnterKeyTyped"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Team2Enter">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Team 2"/>
               </Properties>
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Team2EnterFocusLost"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Team3Enter">
               <Properties>
@@ -1576,9 +1533,6 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Team 4"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Team4EnterActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Team5Enter">
               <Properties>
